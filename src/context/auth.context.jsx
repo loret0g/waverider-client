@@ -12,6 +12,8 @@ function AuthWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [loggedUserId, setLoggedUserId] = useState(null)
   const [isValidatingToken, setIsValidatingToken] = useState(true)  // spinner para que espere que se compruebe
+  //! estado para el rol
+  const [loggedUserRole, setLoggedUserRole] = useState(null)
 
   useEffect(() => {
     authenticatedUser() // Verifica si el usuario está logeado cuando visita la página
@@ -29,6 +31,7 @@ function AuthWrapper(props) {
       // el token es válido
       setIsLoggedIn(true)
       setLoggedUserId(response.data._id)    // Comprobado desde el back, que nos envía el payload
+      setLoggedUserRole(response.data.role)
       setIsValidatingToken(false)
 
     } catch (error) {
@@ -36,6 +39,7 @@ function AuthWrapper(props) {
       console.log(error)
       setIsLoggedIn(false)
       setLoggedUserId(null)
+      setLoggedUserRole(null)
       setIsValidatingToken(false)
     }
   }
@@ -43,6 +47,7 @@ function AuthWrapper(props) {
   const passedContext = {
     isLoggedIn,
     loggedUserId,
+    loggedUserRole,
     authenticatedUser
   }
 

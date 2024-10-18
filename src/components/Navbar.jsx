@@ -6,7 +6,7 @@ function Navbar() {
 
   const navigate = useNavigate()
 
-  const {isLoggedIn, authenticatedUser} = useContext(AuthContext)
+  const {isLoggedIn, authenticatedUser, loggedUserRole, loggedUserId} = useContext(AuthContext)
 
   const handleLogout = async() => {
     try {
@@ -24,7 +24,9 @@ function Navbar() {
     <Link to="/">Home</Link>
       {!isLoggedIn && <Link to="/signup">Registro</Link>}
       {!isLoggedIn && <Link to="/login">Acceso</Link>}
-      {isLoggedIn && <Link to="/profile">Perfil</Link>}
+      {/* {isLoggedIn && <Link to="/profile">Perfil</Link>} */}
+      {isLoggedIn && loggedUserRole === "owner" && <Link to={`/owner/${loggedUserId}`}>Perfil Propietario</Link>}
+      {isLoggedIn && loggedUserRole === "user" && <Link to="/profile">Perfil</Link>}
       {isLoggedIn && <Link onClick={handleLogout}>Cerrar sesión</Link>}
     </nav>
     

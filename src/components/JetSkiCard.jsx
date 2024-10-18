@@ -9,8 +9,8 @@ function JetSkiCard({jetSki}) {
           <img src={jetSki.images[0]} alt={jetSki.name} />
         )}
         <h3>{jetSki.name}</h3>
-        <p>{jetSki.description}</p>
-        <p>Price: {jetSki.price} €</p>
+        {/* <p>{jetSki.description}</p> */}
+        <p>{jetSki.price} €</p>
 
       </div>
     </Link>
