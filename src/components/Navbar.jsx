@@ -20,8 +20,6 @@ function Navbar() {
 
   return (
     <>
-    <div>Navbar</div>
-
     <nav id="navbar">
     <Link to="/">Home</Link>
       {!isLoggedIn && <Link to="/signup">Registro</Link>}

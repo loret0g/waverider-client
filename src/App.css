@@ -3,49 +3,210 @@
   --secondary: #6A9AB0;
   --background-color: #001F3F;
   --sand: #EAD8B1;
-
-  /* background-color: var(--background-color); */
 }
 
-/* Estilo general para toda la página */
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f0f4f8;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  background-color: #6A9AB0;
   margin: 0;
 }
 
+#container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+#navbar {
+  background-color: var(--primary);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 4rem;
+}
+
+/** HOMEPAGE */
+#homepage-container h1 {
+  text-align: center;
+}
+
+.container-jetski {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.jetski-card {
+  background-color: var(--sand);
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+
+.jetski-card img {
+  width: 100%;
+  height: auto;
+}
+
+.jetski-card h3 {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.jetski-card p {
+  /* font-size: 1rem; */
+}
+
+.jetski-card .price {
+  /* margin-bottom: 1rem; */
+}
+
+.jetski-card:hover {
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+/** Página JetSki DETAILS */
+.jetski-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin: 0 auto;
+  margin: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.jetski-details img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.jetski-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  background-color: var(--primary);
+  border-radius: 12px;
+}
+
+.jetski-header h2, .jetski-header h1 {
+  padding: 0 3rem;
+}
+
+.jetski-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+/* Contenedor de la reserva a la derecha */
+.reservation-container {
+  background-color: #f5f5f5;
+  padding: 1rem;
+  border-radius: 12px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: var(--primary);
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+}
+
+.date-reservation input {
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  margin-top: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.btn-reserve {
+  background-color: var(--primary);
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+  width: 100%;
+  /* text-align: center; */
+  font-size: 1.1rem;
+}
+
+.btn-reserve:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+
+
+
+
+/** FOOTER */
+#footer {
+  background-color: var(--primary);
+  width: 100%;
+  height: 4rem;
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
 /* Estilo del contenedor del formulario */
-.form-container {
+/* .form-container {
   background-color: #ffffff;
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 400px;
   max-width: 100%;
-}
+} */
 
 /* Estilo del título */
-.form-title {
+/* .form-title {
   margin-bottom: 20px;
   color: #333;
   text-align: center;
   font-size: 24px;
-}
+} */
 
 /* Estilo de las etiquetas */
-.form-label {
+/* .form-label {
   display: block;
   margin-bottom: 8px;
   color: #555;
   font-size: 16px;
-}
+} */
 
 /* Estilo de los campos de entrada */
-.form-input {
+/* .form-input {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
@@ -53,16 +214,16 @@ body {
   border-radius: 5px;
   box-sizing: border-box;
   font-size: 16px;
-}
+} */
 
 /* Estilo especial para el checkbox */
-.checkbox-input {
+/* .checkbox-input {
   width: auto;
   margin-right: 10px;
-}
+} */
 
 /* Estilo del botón */
-.submit-button {
+/* .submit-button {
   width: 100%;
   padding: 12px;
   background-color: #3498db;
@@ -76,18 +237,18 @@ body {
 
 .submit-button:hover {
   background-color: #2980b9;
-}
+} */
 
 /* Estilo del mensaje de error */
-.error-message {
+/* .error-message {
   color: red;
   text-align: center;
-}
+} */
 
 /* Estilo para los divs internos */
-.checkbox-container {
+/* .checkbox-container {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
-
+ */

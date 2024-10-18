@@ -22,13 +22,13 @@ function AuthWrapper(props) {
 
     try {
 
-      const response = await service.get("auth/verify")   // ya no configuramos que mandamos el token, porque ya está configurado en todas las llamadas que se hagan con ese service 
+      const response = await service.get("auth/verify")   // el token ya está configurado en todas las llamadas que se hagan con ese service 
 
       // console.log(response) 
       
       // el token es válido
       setIsLoggedIn(true)
-      setIsLoggedIn(response.data._id)    // Comprobado desde el back, que nos envía el payload
+      setLoggedUserId(response.data._id)    // Comprobado desde el back, que nos envía el payload
       setIsValidatingToken(false)
 
     } catch (error) {
