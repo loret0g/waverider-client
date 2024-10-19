@@ -10,21 +10,31 @@ import AddJetSkiModal from "../components/AddJetSkiModal"
 
 function OwnerProfile() {
   const { loggedUserId } = useContext(AuthContext)
+  const {ownerId} = useParams()
 
   const [owner, setOwner] = useState()
   const [jetSki, setJetSki] = useState([])
-
-  const {ownerId} = useParams()
+  const [reservations, setReservations] = useState([])
 
   useEffect(() => {
-    getData()
+    getProfile()
+    getReservations()
   }, [])
 
-  const getData = async() => {
+  const getProfile = async () => {
     try {
       const response = await service.get(`/owner/${ownerId}`)
       setOwner(response.data.owner)
       setJetSki(response.data.jetSkis)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getReservations = async () => {
+    try {
+      const response = await service.get(`/reservation/${loggedUserId}`)
+      setReservations(response.data)
     } catch (error) {
       console.log(error)
     }
@@ -48,7 +58,7 @@ function OwnerProfile() {
         
         {loggedUserId === owner._id && (
           <div className="owner-actions">
-            <EditUserModal userId={ownerId} userData={owner} getData={getData} />
+            <EditUserModal ownerId={ownerId} userData={owner} getData={getProfile} />
           </div>
         )}
       </div>
@@ -58,24 +68,40 @@ function OwnerProfile() {
           <div className="container-jetski">
             {jetSki.length === 0 ? (<p>Este propietario no tiene vehículos</p>) : (
               jetSki.map((eachJetSki) => (
-                <JetSkiCard key={eachJetSki._id} jetSki={eachJetSki} isOwnerView={loggedUserId === owner._id} getData={getData} />
+                <JetSkiCard key={eachJetSki._id} jetSki={eachJetSki} isOwnerView={loggedUserId === owner._id} getData={getProfile} />
               ))
             )}
             
           </div>
           {loggedUserId === owner._id && (
             <div className="owner-actions">
-              <AddJetSkiModal getData={getData} />
+              <AddJetSkiModal getData={getProfile} />
             </div>
           )}
       </div>
 
       {loggedUserId === owner._id && (
-          <div className="owner-jetskis">
-            <h2>Tus reservas</h2>
-            <h2>... in processssss</h2>
-          </div>
-        )}
+        <div className="owner-jetskis">
+          <h2>Tus reservas</h2>
+          {reservations.length === 0 ? (
+            <p>No tienes reservas aún.</p>
+          ) : (
+            reservations.map((eachReservation) => (
+              <div key={eachReservation._id} className="reservation-card" style={{color: "white"}}>
+                <h3>Precio: {eachReservation.price}€</h3>
+                <p>Fecha de reserva: {new Date(eachReservation.reservationDate).toLocaleDateString()}</p>
+                <p>Propietario: {eachReservation.owner.username}</p>
+                {eachReservation.jetSki ? (
+                  <p>Moto: {eachReservation.jetSki.name}</p>
+                ) : (
+                  <p>Moto: Información no disponible</p>  // Soluciono así cuando me da jetSki null ¬¬
+                )}
+              </div>
+            ))
+            
+          )}
+        </div>
+      )}
     </div>
   )
 }

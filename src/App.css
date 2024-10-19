@@ -177,7 +177,22 @@ a {
   cursor: not-allowed;
 }
 
-/** Perfil propietario */
+/* Sección reserva si no está autenticado */
+.login-reservation {
+  text-align: center;
+  background-color: #ccc;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+}
+
+.login-reservation p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+
+/** Perfiles */
 .user-profile {
   margin: 0 8rem;
 }
