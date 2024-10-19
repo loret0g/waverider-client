@@ -5,15 +5,15 @@ import Modal from 'react-bootstrap/Modal'
 import service from '../services/config'
 import { AuthContext } from '../context/auth.context'
 
-function EditUserModal({ ownerId, ownerData, getData }) {
+function EditUserModal({ userId, userData, getData }) {
 
   const { loggedUserId } = useContext(AuthContext)
 
   const [show, setShow] = useState(false)
   const [formData, setFormData] = useState({
-    username: ownerData.username,
-    email: ownerData.email,
-    phoneNumber: ownerData.phoneNumber || 0
+    username: userData.username,
+    email: userData.email,
+    phoneNumber: userData.phoneNumber || 0
   })
   const [errorMessage, setErrorMessage] = useState("")
 
@@ -28,29 +28,29 @@ function EditUserModal({ ownerId, ownerData, getData }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
-  };
+  }
 
   // Enviar datos al backend
   const handleFormSubmit = async () => {
     try {
-      await service.put(`/profile/${ownerId}`, formData)
+      await service.put(`/profile/${userId}`, formData)
       getData() // Actualizar los datos
       handleClose()
     } catch (error) {
       console.log(error)
       if (error.response && error.response.data) {
         // Capturamos el mensaje de error del backend y lo mostramos en el frontend
-        setErrorMessage(error.response.data.message);
+        setErrorMessage(error.response.data.message)
       } else {
-        setErrorMessage("Error al actualizar los datos, intenta de nuevo.");
+        setErrorMessage("Error al actualizar los datos, intenta de nuevo.")
       }
     }
-  };
+  }
 
   return (
     <>
       {/* Mostrar botón solo si el usuario logueado es el propietario */}
-      {loggedUserId === ownerId && (
+      {loggedUserId === userId && (
         <Button variant="primary" onClick={handleShow}>
           Editar perfil
         </Button>
@@ -108,4 +108,4 @@ function EditUserModal({ ownerId, ownerData, getData }) {
   )
 }
 
-export default EditUserModal;
+export default EditUserModal

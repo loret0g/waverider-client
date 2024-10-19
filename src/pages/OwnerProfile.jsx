@@ -35,8 +35,8 @@ function OwnerProfile() {
   if (!owner) return <p>Loading...</p>
 
   return (
-    <div className="owner-profile">
-      <div className="owner-details">
+    <div className="user-profile">
+      <div className="user-details">
         <h2>{owner.username}</h2>
         {/* Estos dos campos serán... si los usuarios tienen una reserva con este propietario */}
         {loggedUserId === ownerId && (
@@ -48,7 +48,7 @@ function OwnerProfile() {
         
         {loggedUserId === owner._id && (
           <div className="owner-actions">
-            <EditUserModal ownerId={ownerId} ownerData={owner} getData={getData} />
+            <EditUserModal userId={ownerId} userData={owner} getData={getData} />
           </div>
         )}
       </div>
@@ -70,10 +70,12 @@ function OwnerProfile() {
           )}
       </div>
 
-      <div className="owner-jetskis">
-        <h2>Tus reservas</h2>
-        <h2>... in processssss</h2>
-      </div>
+      {loggedUserId === owner._id && (
+          <div className="owner-jetskis">
+            <h2>Tus reservas</h2>
+            <h2>... in processssss</h2>
+          </div>
+        )}
     </div>
   )
 }

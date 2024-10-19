@@ -178,11 +178,11 @@ a {
 }
 
 /** Perfil propietario */
-.owner-profile {
-  margin: 0 auto;
+.user-profile {
+  margin: 0 8rem;
 }
 
-.owner-details {
+.user-details {
   width: 100%;
   background-color: #f5f5f5;
   padding: 1rem 0;

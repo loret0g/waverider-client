@@ -1,65 +1,63 @@
-import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Modal from "react-bootstrap/Modal";
-import service from "../services/config";
+import { useState } from "react"
+import Button from "react-bootstrap/Button"
+import Form from "react-bootstrap/Form"
+import Modal from "react-bootstrap/Modal"
+import service from "../services/config"
 
 function EditJetSkiModal({ jetSki, getData }) {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
   const [formData, setFormData] = useState({
     name: jetSki.name,
     description: jetSki.description,
     price: jetSki.price,
     images: jetSki.images || [],
-  });
-  const [errorMessage, setErrorMessage] = useState("");
-  const [confirmDelete, setConfirmDelete] = useState(false);
+  })
+  const [errorMessage, setErrorMessage] = useState("")
+  const [confirmDelete, setConfirmDelete] = useState(false)
 
-  const handleShow = () => setShow(true);
+  const handleShow = () => setShow(true)
   const handleClose = () => {
-    setShow(false);
-    setErrorMessage("");
-    setConfirmDelete(false);
-  };
+    setShow(false)
+    setErrorMessage("")
+    setConfirmDelete(false)
+  }
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+  }
 
   const handleFormSubmit = async () => {
     try {
-      const response = await service.put(
-        `/owner/jet-ski/${jetSki._id}`,
-        formData
-      ); // PUT para actualizar la moto
-      console.log(response);
-      getData(); // Actualizamos los datos en el OwnerProfile
-      handleClose();
+      const response = await service.put(`/owner/jet-ski/${jetSki._id}`, formData)
+      console.log(response)
+      getData()
+      handleClose()
+
     } catch (error) {
-      console.log(error);
+      console.log(error)
       if (error.response && error.response.data) {
-        setErrorMessage(error.response.data.message);
+        setErrorMessage(error.response.data.message)
       } else {
-        setErrorMessage("Error al actualizar los datos, intenta de nuevo.");
+        setErrorMessage("Error al actualizar los datos, inténtalo de nuevo.")
       }
     }
-  };
+  }
 
   const handleConfirmDelete = () => {
-    setConfirmDelete(true);
-  };
+    setConfirmDelete(true)
+  }
 
   const handleDelete = async () => {
     try {
-      await service.delete(`/owner/jet-ski/${jetSki._id}`);
-      getData();
-      handleClose();
+      await service.delete(`/owner/jet-ski/${jetSki._id}`)
+      getData()
+      handleClose()
     } catch (error) {
-      console.log(error);
-      setErrorMessage("Error al eliminar la moto, inténtalo de nuevo.");
+      console.log(error)
+      setErrorMessage("Error al eliminar la moto, inténtalo de nuevo.")
     }
-  };
+  }
 
   return (
     <>
@@ -119,11 +117,7 @@ function EditJetSkiModal({ jetSki, getData }) {
                   />
                 </Form.Group>
               </Form>
-              {errorMessage && (
-                <p style={{ color: "red", marginTop: "1rem" }}>
-                  {errorMessage}
-                </p>
-              )}
+              {errorMessage && <p style={{ color: 'red', marginTop: "1rem" }}>{errorMessage}</p>}
             </>
           ) : (
             <p>¿Estás seguro de que deseas eliminar esta moto?</p>
@@ -159,7 +153,7 @@ function EditJetSkiModal({ jetSki, getData }) {
         </Modal.Footer>
       </Modal>
     </>
-  );
+  )
 }
 
-export default EditJetSkiModal;
+export default EditJetSkiModal
