@@ -2,12 +2,13 @@ import { useContext, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 
 import service from "../services/config"
-import JetSkiCard from '../components/JetSkiCard'
-
 import { AuthContext } from "../context/auth.context"
 
-function OwnerProfile() {
+import EditUserModal from "../components/EditUserModal"
+import JetSkiCard from '../components/JetSkiCard'
+import AddJetSkiModal from "../components/AddJetSkiModal"
 
+function OwnerProfile() {
   const { loggedUserId } = useContext(AuthContext)
 
   const [owner, setOwner] = useState()
@@ -33,53 +34,45 @@ function OwnerProfile() {
 
   if (!owner) return <p>Loading...</p>
 
-
   return (
     <div className="owner-profile">
       <div className="owner-details">
         <h2>{owner.username}</h2>
-        {/* <p>Email: {owner.email}</p> */}
-
+        {/* Estos dos campos serán... si los usuarios tienen una reserva con este propietario */}
+        {loggedUserId === ownerId && (
+        <>
+          <h3>{owner.email}</h3>
+          <h3>{owner.phoneNumber}</h3>
+        </>
+        )}
+        
         {loggedUserId === owner._id && (
           <div className="owner-actions">
-            <button>
-              <Link to={`/profile/${owner._id}/edit`}>Editar datos</Link>
-            </button>
+            <EditUserModal ownerId={ownerId} ownerData={owner} getData={getData} />
           </div>
         )}
-
-
       </div>
 
       <div className="owner-jetskis">
         <h2>Motos de {owner.username}</h2>
-        {jetSki.length === 0 ? (
-          <p>No hay motos disponibles</p>
-        ) : (
           <div className="container-jetski">
             {jetSki.length === 0 ? (<p>Este propietario no tiene vehículos</p>) : (
-          jetSki.map((eachJetSki) => (
-            <JetSkiCard key={eachJetSki._id} jetSki={eachJetSki} />
-          ))
-        )}
-        {loggedUserId === owner._id && (
-          <div className="owner-actions">
-            <button>
-              <Link to={`/profile/${owner._id}/add-jet-ski`}>Añadir moto</Link>
-            </button>
+              jetSki.map((eachJetSki) => (
+                <JetSkiCard key={eachJetSki._id} jetSki={eachJetSki} isOwnerView={loggedUserId === owner._id} getData={getData} />
+              ))
+            )}
+            
           </div>
-        )}
-            {/* {jetSki.map((jetSki) => (
-              <div key={jetSki._id} className="jetski-card">
-                {jetSki.images.length > 0 && (
-                  <img src={jetSki.images[0]} alt={jetSki.name} />
-                )}
-                <h4>{jetSki.name}</h4>
-                <p>{jetSki.price} €</p>
-              </div>
-            ))} */}
-          </div>
-        )}
+          {loggedUserId === owner._id && (
+            <div className="owner-actions">
+              <AddJetSkiModal getData={getData} />
+            </div>
+          )}
+      </div>
+
+      <div className="owner-jetskis">
+        <h2>Tus reservas</h2>
+        <h2>... in processssss</h2>
       </div>
     </div>
   )

@@ -2,6 +2,8 @@ import { useState } from 'react'
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 import Navbar from "./components/Navbar"
 
 import HomePage from "./pages/HomePage"
