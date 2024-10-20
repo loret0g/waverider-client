@@ -1,51 +1,75 @@
-import { useState, useContext } from 'react'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import Modal from 'react-bootstrap/Modal'
-import service from '../services/config'
-import { AuthContext } from '../context/auth.context'
+import { useState, useContext } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
+import service from "../services/config";
+import { AuthContext } from "../context/auth.context";
 
 function EditUserModal({ userId, userData, getData }) {
+  const { loggedUserId } = useContext(AuthContext);
 
-  const { loggedUserId } = useContext(AuthContext)
-
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({
     username: userData.username,
     email: userData.email,
-    phoneNumber: userData.phoneNumber || 0
-  })
-  const [errorMessage, setErrorMessage] = useState("")
+    phoneNumber: userData.phoneNumber || 0,
+  });
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Manejo de apertura y cierre del modal
-  const handleShow = () => setShow(true)
+  const handleShow = () => setShow(true);
   const handleClose = () => {
-    setShow(false)
-    setErrorMessage("")
-  }
+    setShow(false);
+    setErrorMessage("");
+  };
 
   // Cambios en el formulario
   const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
-  }
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   // Enviar datos al backend
   const handleFormSubmit = async () => {
     try {
-      await service.put(`/profile/${userId}`, formData)
-      getData() // Actualizar los datos
-      handleClose()
+      await service.put(`/profile/${userId}`, formData);
+      getData(); // Actualizar los datos
+      handleClose();
     } catch (error) {
-      console.log(error)
+      console.log(error);
       if (error.response && error.response.data) {
-        // Capturamos el mensaje de error del backend y lo mostramos en el frontend
-        setErrorMessage(error.response.data.message)
+        setErrorMessage(error.response.data.message);
       } else {
-        setErrorMessage("Error al actualizar los datos, intenta de nuevo.")
+        setErrorMessage("Error al actualizar los datos, intenta de nuevo.");
       }
     }
-  }
+  };
+  /* Cloudinary */
+  const [imageUrl, setImageUrl] = useState(null);
+  const [isUploading, setIsUploading] = useState(false); // for a loading animation effect
+
+  // below function should be the only function invoked when the file type input changes => onChange={handleFileUpload}
+  const handleFileUpload = async (event) => {
+    if (!event.target.files[0]) {
+      return;
+    }
+
+    setIsUploading(true); // to start the loading animation
+
+    const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
+    uploadData.append("image", event.target.files[0]);
+
+    try {
+      const response = await service.post("/upload", uploadData);
+
+      setImageUrl(response.data.imageUrl);
+      setFormData({ ...formData, photo: response.data.imageUrl });
+      setIsUploading(false);
+    } catch (error) {
+      // navigate("/error");
+      console.log(error)
+    }
+  };
 
   return (
     <>
@@ -90,10 +114,26 @@ function EditUserModal({ userId, userData, getData }) {
                 onChange={handleInputChange}
               />
             </Form.Group>
+            <Form.Group controlId="formImages" className="mt-3">
+                  <Form.Label>Selecciona una imagen</Form.Label>
+                  <Form.Control
+                    type="file"
+                    name="images"
+                    onChange={handleFileUpload}
+                    disabled={isUploading}
+                  />
+                  {isUploading ? <h3>... uploading image</h3> : null}
+                  {imageUrl ? (
+                    <div>
+                      <img src={imageUrl} alt="img" width={200} />
+                    </div>
+                  ) : null}
+                </Form.Group>
           </Form>
 
-          {errorMessage && <p style={{ color: 'red', marginTop: "1rem" }}>{errorMessage}</p>}
-
+          {errorMessage && (
+            <p style={{ color: "red", marginTop: "1rem" }}>{errorMessage}</p>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -105,7 +145,7 @@ function EditUserModal({ userId, userData, getData }) {
         </Modal.Footer>
       </Modal>
     </>
-  )
+  );
 }
 
-export default EditUserModal
+export default EditUserModal;

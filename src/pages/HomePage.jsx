@@ -25,7 +25,7 @@ function HomePage() {
       <h1>Motos en alquiler</h1>
 
       <div className="container-jetski">
-        {jetSki.length === 0 ? (<p>No disponbemos de vehículos en este momento</p>) : (
+        {jetSki.length === 0 ? (<p>No disponemos de vehículos en este momento</p>) : (
           jetSki.map((eachJetSki) => (
             <JetSkiCard key={eachJetSki._id} jetSki={eachJetSki} />
           ))

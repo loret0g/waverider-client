@@ -49,32 +49,38 @@ function OwnerProfile() {
 
   return (
     <div className="user-profile">
-      <div className="user-details">
-        <h2>{owner.username}</h2>
-        {/* Estos dos campos serán... si los usuarios tienen una reserva con este propietario */}
-        {(loggedUserId === owner._id || hasReservationWithOwner) && (
-          <>
-            <h3>{owner.email}</h3>
-            <h3>{owner.phoneNumber}</h3>
-          </>
-        )}
+      
 
-        {loggedUserId === ownerId && (
-          <div className="owner-actions">
-            <EditUserModal
-              userId={ownerId}
-              userData={owner}
-              getData={getProfile}
-            />
-          </div>
-        )}
+
+      <div className="user-details">
+        <div>
+          <img src={owner.photo} alt="Foto de perfil" />
+          {loggedUserId === ownerId && (
+            <div className="owner-actions">
+              <EditUserModal
+                userId={ownerId}
+                userData={owner}
+                getData={getProfile}
+              />
+            </div>
+          )}
+        </div>
+        <div className="user-data">
+          <h2>{owner.username}</h2>
+          {(loggedUserId === owner._id || hasReservationWithOwner) && (
+            <>
+              <h3>{owner.email}</h3>
+              <h3>{owner.phoneNumber}</h3>
+            </>
+          )}
+        </div>
       </div>
 
       <div className="owner-jetskis">
         <h2>Motos de {owner.username}</h2>
         <div className="container-jetski">
           {jetSki.length === 0 ? (
-            <p>Este propietario no tiene vehículos</p>
+            <p>Aún no has añadido ningún vehículo.</p>
           ) : (
             jetSki.map((eachJetSki) => (
               <JetSkiCard
@@ -94,7 +100,7 @@ function OwnerProfile() {
       </div>
 
       {loggedUserId === owner._id && (
-        <div className="owner-jetskis">
+        <div className="reservation-container">
           <h2>Tus Reservas</h2>
           {reservations.length === 0 ? (
             <p>No tienes reservas aún.</p>

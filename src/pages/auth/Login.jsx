@@ -3,16 +3,18 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+
 function Login() {
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-
-  const { authenticatedUser } = useContext(AuthContext)
+  const { authenticatedUser } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [errorMessage, setErrorMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -20,28 +22,26 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    setErrorMessage("")
+    setErrorMessage("");
 
     try {
-
       const userCredentials = {
         email,
-        password
-      }
+        password,
+      };
 
-      const response = await service.post("/auth/login", userCredentials)   // Aquí recibimos el token
+      const response = await service.post("/auth/login", userCredentials); // Aquí recibimos el token
 
-      localStorage.setItem("authToken", response.data.authToken)    //nombre de la propiedad - valor a almacenar (recibido por el backend)
+      localStorage.setItem("authToken", response.data.authToken); //nombre de la propiedad - valor a almacenar (recibido por el backend)
 
-      await authenticatedUser()
+      await authenticatedUser();
 
-      navigate("/")
-
+      navigate("/");
     } catch (error) {
-      console.log(error)
+      console.log(error);
       //! redirección a /error
-      if(error.response.status === 400) {
-        setErrorMessage(error.response.data.message)
+      if (error.response.status === 400) {
+        setErrorMessage(error.response.data.message);
       } else {
         // Aquí debe redireccionar a una pag de error
       }
@@ -49,37 +49,34 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="form-container">
+      <h1 className="form-title">Formulario de Acceso</h1>
 
-      <h1>Formulario de Acceso</h1>
-
-      <form onSubmit={handleLogin}>
-        <label>Correo Electronico:</label>
+      <form onSubmit={handleLogin} className="form">
+        <label className="form-label">Correo Electrónico:</label>
         <input
+          className="form-input"
           type="email"
           name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <br />
-
-        <label>Contraseña:</label>
+        <label className="form-label">Contraseña:</label>
         <input
+          className="form-input"
           type="password"
           name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <br />
+        <button type="submit" className="submit-button">
+          Acceder
+        </button>
 
-        <button type="submit">Acceder</button>
-
-        {errorMessage && <p>{errorMessage}</p>}   
-
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </form>
-      
     </div>
   );
 }

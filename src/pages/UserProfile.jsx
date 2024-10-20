@@ -12,7 +12,7 @@ function UserProfile() {
   const [user, setUser] = useState(null);
   const [reservations, setReservations] = useState([]);
 
-  const {userId} = useParams()
+  const { userId } = useParams();
 
   useEffect(() => {
     getProfile();
@@ -23,7 +23,7 @@ function UserProfile() {
     try {
       const response = await service.get(`/profile/${userId}`);
       setUser(response.data);
-      console.log(response.data)
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -44,32 +44,35 @@ function UserProfile() {
 
   if (!user) return <p>Loading...</p>;
   if (!reservations) return <p>Loading...</p>;
-  
+
   return (
     <div className="user-profile">
       <div className="user-details">
-        <h2>{user.username}</h2>
-        {/* Estos dos campos tb serán... si los usuarios tienen una reserva con este perfil */}
-        {(loggedUserId === user._id || hasReservationWithUser) && (
-          <>
-            <h3>{user.email}</h3>
-            <h3>{user.phoneNumber}</h3>
-          </>
-        )}
-
-        {loggedUserId === user._id && (
-          <div className="owner-actions">
-            <EditUserModal
-              userId={loggedUserId}
-              userData={user}
-              getData={getProfile}
-            />
-          </div>
-        )}
+        <div>
+          <img src={user.photo} alt="Foto de perfil" />
+          {loggedUserId === user._id && (
+            <div className="owner-actions">
+              <EditUserModal
+                userId={loggedUserId}
+                userData={user}
+                getData={getProfile}
+              />
+            </div>
+          )}
+        </div>
+        <div className="user-data">
+          <h2>{user.username}</h2>
+          {(loggedUserId === user._id || hasReservationWithUser) && (
+            <>
+              <h3>{user.email}</h3>
+              <h3>{user.phoneNumber}</h3>
+            </>
+          )}
+        </div>
       </div>
 
       {loggedUserId === user._id && (
-        <div className="owner-jetskis">
+        <div className="reservation-container">
           <h2>Tus Reservas</h2>
           {reservations.length === 0 ? (
             <p>No tienes reservas aún.</p>
