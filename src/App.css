@@ -44,7 +44,7 @@ a {
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-  padding: 2rem;
+  padding-bottom: 2rem;
 }
 
 .jetski-card {
@@ -55,7 +55,6 @@ a {
   width: 100%;
   text-align: center;
   overflow: hidden;
-  /* padding-bottom: 1rem; */
 }
 
 .jetski-card img {
@@ -80,7 +79,7 @@ a {
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-
+/**************************************************/
 /** Página JetSki DETAILS */
 .jetski-details {
   display: flex;
@@ -135,7 +134,6 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
 }
 
 .price {
@@ -191,10 +189,15 @@ a {
   text-align: center;
 }
 
-
+/**************************************************/
 /** Perfiles */
 .user-profile {
-  margin: 0 8rem;
+  margin: 0 1rem;
+}
+@media (min-width: 768px) {
+  .user-profile {
+    margin: 0 8rem;
+  }
 }
 
 .user-details {
@@ -206,19 +209,123 @@ a {
   border-radius: 8px;
 }
 
-/* Contenedor motos del propietario*/
+/**************************************************/
+/* Perfiles -- Contenedor motos y reservas */
 .owner-jetskis {  
   width: 100%;
   background-color: #001F3F;
   text-align: center;
   border-radius: 12px;
   margin-bottom: 2rem;
+  margin-top: 2rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+
+/* RESERVAS desde el perfil */
 .owner-jetskis h2 {
-  color: #fff;
-  padding-top: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #333;
+  font-weight: 600;
 }
+
+.reservation-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ffffff;
+  color: #333;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 12px;
+  width: 80%;
+
+}
+
+.reservation-details {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.reservation-details h3 {
+  font-size: 1.4rem;
+  margin: 0;
+  color: var(--background-color);
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .reservation-details h3 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Información de contacto */
+.contact-info {
+  background-color: #f0f8ff;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact-info p {
+  margin: 0;
+  font-size: 1.1rem;
+  text-align: left;
+}
+
+.contact-info h4 {
+  font-size: 1.2rem;
+  color: #007bff;
+}
+
+.contact-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.contact-actions p {
+  color: #555;
+  margin: 0.2rem 0;
+}
+
+/* Clases de bootstrap para el acordeon */
+.accordion-button {
+  padding: 0.5rem !important;
+  background-color: #00000026 !important;
+  /* margin-bottom: 1rem !important; */
+}
+.accordion-button:not(.collapsed) {
+  background-color: var(--secondary) !important;
+}
+.accordion-button:focus {
+  z-index: 3;
+  outline: 0;
+  box-shadow: var(--sand) !important;
+}
+
+/* Sección del precio */
+.price-section {
+  margin-top: 1rem;
+  text-align: right;
+}
+
+.price {
+  color: var(--sand);
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
 
 
 /** FOOTER */

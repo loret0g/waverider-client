@@ -1,42 +1,70 @@
-import axios from "axios"
-import { useContext, useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-import { AuthContext } from "../context/auth.context"
-import { Modal, Button } from "react-bootstrap"
+import { AuthContext } from "../context/auth.context";
+import service from "../services/config";
+import { Modal, Button } from "react-bootstrap";
 
 function JetSkiDetails() {
-  const { isLoggedIn } = useContext(AuthContext)
+  const { isLoggedIn, loggedUserRole, loggedUserId } = useContext(AuthContext);
+  const { jetSkiId } = useParams();
+  const navigate = useNavigate();
 
-  const [jetSki, setJetSki] = useState(null)
-  const [selectedDate, setSelectedDate] = useState("")
-  const [showWarning, setShowWarning] = useState(false)
+  const [jetSki, setJetSki] = useState(null);
+  const [selectedDate, setSelectedDate] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const {jetSkiId} = useParams()
+  const [showWarning, setShowWarning] = useState(false); // Modal cuando no está autenticado y quiere ver el perfil del propietario
 
   useEffect(() => {
-    getData()
-  }, [])
+    getJetSkis();
+  }, []);
 
-  const getData = async() => {
+  const getJetSkis = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/jet-ski/${jetSkiId}`)
-      setJetSki(response.data)
+      const response = await axios.get(
+        `${import.meta.env.VITE_SERVER_URL}/api/jet-ski/${jetSkiId}`
+      );
+      setJetSki(response.data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
+
+  const handleReservation = async () => {
+    try {
+      const response = await service.post(`/reservation/${jetSkiId}`, {
+        reservationDate: selectedDate,
+      });
+
+      setErrorMessage("");
+
+      if (loggedUserRole === "owner") {
+        navigate(`/owner/${loggedUserId}`);
+      } else {
+        navigate("/profile");
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response && error.response.data) {
+        setErrorMessage(error.response.data.message);
+      } else {
+        setErrorMessage("Error al realizar la reserva. Inténtalo de nuevo.");
+      }
+    }
+  };
 
   const handleOwnerClick = (e) => {
     if (!isLoggedIn) {
-      e.preventDefault()
-      setShowWarning(true)
+      e.preventDefault();
+      setShowWarning(true);
     }
-  }
+  };
 
-  const handleCloseWarning = () => setShowWarning(false)
+  const handleCloseWarning = () => setShowWarning(false);
 
-  if (!jetSki) return <p>Loading...</p>
+  if (!jetSki) return <p>Loading...</p>;
 
   return (
     <div className="jetski-details">
@@ -46,15 +74,15 @@ function JetSkiDetails() {
 
       <div className="jetski-header">
         <h1>{jetSki.name}</h1>
-          <Link to={`/owner/${jetSki.owner._id}`} onClick={handleOwnerClick}>
-            <h2>{jetSki.owner.username}</h2>
-          </Link>
+        <Link to={`/owner/${jetSki.owner._id}`} onClick={handleOwnerClick}>
+          <h2>{jetSki.owner.username}</h2>
+        </Link>
       </div>
 
       <div className="jetski-info">
         <p>{jetSki.description}</p>
 
-        {/* Div que condiciona la experiencia de usuario según autenticación */}
+        {/* Condición según autenticación */}
         <div className="reservation-container">
           <p className="price"> {jetSki.price}€</p>
 
@@ -66,7 +94,18 @@ function JetSkiDetails() {
                 onChange={(e) => setSelectedDate(e.target.value)}
                 min={new Date().toISOString().split("T")[0]} // No permitir fechas pasadas
               />
-              <button className="btn-reserve" disabled={!selectedDate}>
+
+              {errorMessage && (
+                <p style={{ color: "red", marginTop: "1rem" }}>
+                  {errorMessage}
+                </p>
+              )}
+
+              <button
+                className="btn-reserve"
+                disabled={!selectedDate}
+                onClick={handleReservation}
+              >
                 <p>Reserva ahora</p>
               </button>
             </div>
@@ -76,7 +115,12 @@ function JetSkiDetails() {
               <Button variant="primary" as={Link} to="/login">
                 Inicia sesión
               </Button>
-              <Button variant="secondary" as={Link} to="/signup" className="ms-2">
+              <Button
+                variant="secondary"
+                as={Link}
+                to="/signup"
+                className="ms-2"
+              >
                 Regístrate
               </Button>
             </div>
@@ -104,7 +148,7 @@ function JetSkiDetails() {
         </Modal.Footer>
       </Modal>
     </div>
-  )
+  );
 }
 
-export default JetSkiDetails
+export default JetSkiDetails;
