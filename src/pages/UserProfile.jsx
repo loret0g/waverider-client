@@ -4,12 +4,15 @@ import { AuthContext } from "../context/auth.context";
 import Accordion from "react-bootstrap/Accordion";
 
 import EditUserModal from "../components/EditUserModal";
+import { Link, useParams } from "react-router-dom";
 
 function UserProfile() {
   const { loggedUserId } = useContext(AuthContext);
 
   const [user, setUser] = useState(null);
   const [reservations, setReservations] = useState([]);
+
+  const {userId} = useParams()
 
   useEffect(() => {
     getProfile();
@@ -18,8 +21,9 @@ function UserProfile() {
 
   const getProfile = async () => {
     try {
-      const response = await service.get(`/profile/${loggedUserId}`);
+      const response = await service.get(`/profile/${userId}`);
       setUser(response.data);
+      console.log(response.data)
     } catch (error) {
       console.log(error);
     }
@@ -34,15 +38,19 @@ function UserProfile() {
     }
   };
 
+  const hasReservationWithUser = reservations.some(
+    (eachReservation) => eachReservation.user._id === userId
+  );
+
   if (!user) return <p>Loading...</p>;
   if (!reservations) return <p>Loading...</p>;
-
+  
   return (
     <div className="user-profile">
       <div className="user-details">
         <h2>{user.username}</h2>
         {/* Estos dos campos tb serán... si los usuarios tienen una reserva con este perfil */}
-        {loggedUserId === user._id && (
+        {(loggedUserId === user._id || hasReservationWithUser) && (
           <>
             <h3>{user.email}</h3>
             <h3>{user.phoneNumber}</h3>
@@ -81,26 +89,26 @@ function UserProfile() {
                     ).toLocaleDateString()}
                   </h3>
                 </div>
-
-                {/* Información de contacto del propietario */}
-                {/* <div className="contact-info">
-            <div>
-              <h4>Contacta con su propietario</h4>
-              <p>{eachReservation.owner.username}</p>
-              <p>Email: {eachReservation.owner.email}</p>
-              <p>Teléfono: {eachReservation.owner.phoneNumber || "No disponible"}</p>
-            </div>
-          </div> */}
                 <Accordion>
                   <Accordion.Item eventKey="0">
-                    <Accordion.Header  style={{ padding: '0', margin: "0" }}>
-                     <h4>Contacta con su propietario</h4> 
+                    <Accordion.Header style={{ padding: "0", margin: "0" }}>
+                      <h4>Contacta con su propietario</h4>
                     </Accordion.Header>
-                    <Accordion.Body style={{textAlign: "left"}} >
-                      <p>Nombre: {eachReservation.owner.username}</p>
-                      <p>Email: {eachReservation.owner.email}</p>
+                    <Accordion.Body>
+                      <Link to={`/owner/${eachReservation.owner._id}`}>
+                        <p>
+                          <i className="fas fa-user"></i>{" "}
+                          <span style={{ color: "#3A6D8C" }}>
+                            {eachReservation.owner.username}
+                          </span>
+                        </p>
+                      </Link>
                       <p>
-                        Teléfono:{" "}
+                        <i className="fas fa-envelope"></i>{" "}
+                        {eachReservation.owner.email}
+                      </p>
+                      <p>
+                        <i className="fas fa-phone"></i>{" "}
                         {eachReservation.owner.phoneNumber || "No disponible"}
                       </p>
                     </Accordion.Body>

@@ -26,7 +26,7 @@ function Navbar() {
       {!isLoggedIn && <Link to="/login">Acceso</Link>}
       {/* {isLoggedIn && <Link to="/profile">Perfil</Link>} */}
       {isLoggedIn && loggedUserRole === "owner" && <Link to={`/owner/${loggedUserId}`}>Perfil Propietario</Link>}
-      {isLoggedIn && loggedUserRole === "user" && <Link to="/profile">Perfil</Link>}
+      {isLoggedIn && loggedUserRole === "user" && <Link to={`/profile/${loggedUserId}`}>Perfil</Link>}
       {isLoggedIn && <Link onClick={handleLogout}>Cerrar sesión</Link>}
     </nav>
     

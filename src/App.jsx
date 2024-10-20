@@ -3,6 +3,7 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import '@fortawesome/fontawesome-free/css/all.min.css'
 
 import Navbar from "./components/Navbar"
 
@@ -27,7 +28,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
 
-        <Route path="/profile" element={<ProtectedRoute> <UserProfile /> </ProtectedRoute>} />
+        <Route path="/profile/:userId" element={<ProtectedRoute> <UserProfile /> </ProtectedRoute>} />
         <Route path="/owner/:ownerId" element={<ProtectedRoute> <OwnerProfile/> </ProtectedRoute>}/>
 
         <Route path="/jet-ski/:jetSkiId" element={<JetSkiDetails/>} />

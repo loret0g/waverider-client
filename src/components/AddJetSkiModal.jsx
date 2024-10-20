@@ -54,7 +54,7 @@ function AddJetSkiModal({ getData }) {
         <Modal.Body>
           <Form>
             <Form.Group controlId="formName">
-              <Form.Label>Nombre</Form.Label>
+              <Form.Label>Modelo</Form.Label>
               <Form.Control
                 type="text"
                 name="name"
@@ -72,7 +72,6 @@ function AddJetSkiModal({ getData }) {
                 value={formData.description}
                 onChange={handleInputChange}
                 rows={3}
-                placeholder="Descripción de la moto"
               />
             </Form.Group>
             <Form.Group controlId="formPrice" className="mt-3">
@@ -92,7 +91,6 @@ function AddJetSkiModal({ getData }) {
                 name="images"
                 value={formData.images}
                 onChange={handleInputChange}
-                placeholder="URL de la imagen"
               />
             </Form.Group>
           </Form>

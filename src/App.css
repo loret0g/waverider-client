@@ -67,8 +67,9 @@ a {
   margin: 10px 0;
 }
 
-.jetski-card p {
-  /* font-size: 1rem; */
+.jetski-card a p {
+  color: var(--primary);
+  font-weight: bold;
 }
 
 .jetski-card .price {
@@ -123,6 +124,11 @@ a {
   align-items: flex-start;
   width: 100%;
   margin-top: 1.5rem;
+}
+
+.jetski-info p {
+  padding-right: 2rem;
+  white-space: pre-line;
 }
 
 /* Contenedor de la reserva a la derecha */
@@ -230,8 +236,12 @@ a {
   text-align: center;
   margin-bottom: 1.5rem;
   font-size: 2rem;
-  color: #333;
+  color: #ccc;
   font-weight: 600;
+}
+
+.owner-jetskis p {
+  color: #fff;
 }
 
 .reservation-card {
@@ -266,40 +276,12 @@ a {
   }
 }
 
-/* Información de contacto */
-.contact-info {
-  background-color: #f0f8ff;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.contact-info p {
-  margin: 0;
-  font-size: 1.1rem;
+.reservation-card p {
+  color: #000;
   text-align: left;
 }
 
-.contact-info h4 {
-  font-size: 1.2rem;
-  color: #007bff;
-}
-
-.contact-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.contact-actions p {
-  color: #555;
-  margin: 0.2rem 0;
-}
-
-/* Clases de bootstrap para el acordeon */
+/** Clases de bootstrap para el acordeon */
 .accordion-button {
   padding: 0.5rem !important;
   background-color: #00000026 !important;
@@ -313,6 +295,15 @@ a {
   outline: 0;
   box-shadow: var(--sand) !important;
 }
+.accordion-body {
+  padding: 1rem !important;
+  padding-bottom: 0 !important;
+  margin: 0 !important;
+}
+
+/* .accordion-body p {
+  color: red;
+} */
 
 /* Sección del precio */
 .price-section {

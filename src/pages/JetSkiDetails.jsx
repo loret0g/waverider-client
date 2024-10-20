@@ -43,7 +43,7 @@ function JetSkiDetails() {
       if (loggedUserRole === "owner") {
         navigate(`/owner/${loggedUserId}`);
       } else {
-        navigate("/profile");
+        navigate(`/profile/${loggedUserId}`);
       }
     } catch (error) {
       console.log(error);
@@ -84,7 +84,7 @@ function JetSkiDetails() {
 
         {/* Condición según autenticación */}
         <div className="reservation-container">
-          <p className="price"> {jetSki.price}€</p>
+          <h2 className="price"> {jetSki.price}€</h2>
 
           {isLoggedIn ? (
             <div className="date-reservation">
@@ -106,7 +106,7 @@ function JetSkiDetails() {
                 disabled={!selectedDate}
                 onClick={handleReservation}
               >
-                <p>Reserva ahora</p>
+                <h4>Reserva ahora</h4>
               </button>
             </div>
           ) : (

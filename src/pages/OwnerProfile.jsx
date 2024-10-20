@@ -41,6 +41,10 @@ function OwnerProfile() {
     }
   };
 
+  const hasReservationWithOwner = reservations.some(
+    (eachReservation) => eachReservation.owner._id === ownerId
+  );
+
   if (!owner) return <p>Loading...</p>;
 
   return (
@@ -48,17 +52,17 @@ function OwnerProfile() {
       <div className="user-details">
         <h2>{owner.username}</h2>
         {/* Estos dos campos serán... si los usuarios tienen una reserva con este propietario */}
-        {loggedUserId === ownerId && (
+        {(loggedUserId === owner._id || hasReservationWithOwner) && (
           <>
             <h3>{owner.email}</h3>
             <h3>{owner.phoneNumber}</h3>
           </>
         )}
 
-        {loggedUserId === owner._id && (
+        {loggedUserId === ownerId && (
           <div className="owner-actions">
             <EditUserModal
-              ownerId={ownerId}
+              userId={ownerId}
               userData={owner}
               getData={getProfile}
             />
@@ -117,11 +121,25 @@ function OwnerProfile() {
                     <Accordion.Header style={{ padding: "0", margin: "0" }}>
                       <h4>Contacta con el cliente</h4>
                     </Accordion.Header>
-                    <Accordion.Body style={{ textAlign: "left" }}>
-                      <p>Nombre: {eachReservation.user.username}</p>
-                      <p>Email: {eachReservation.user.email}</p>
+                    <Accordion.Body>
+                      {/* Link al perfil del cliente */}
+                      {console.log(eachReservation.user._id)}
+                      <Link to={`/profile/${eachReservation.user._id}`}>
+                        <p>
+                          <i className="fas fa-user"></i>{" "}
+                          <span style={{ color: "#3A6D8C" }}>
+                            {eachReservation.user.username}
+                          </span>
+                        </p>
+                      </Link>
+                      {/* Email del cliente */}
                       <p>
-                        Teléfono:{" "}
+                        <i className="fas fa-envelope"></i>{" "}
+                        {eachReservation.user.email}
+                      </p>
+                      {/* Teléfono del cliente */}
+                      <p>
+                        <i className="fas fa-phone"></i>{" "}
                         {eachReservation.user.phoneNumber || "No disponible"}
                       </p>
                     </Accordion.Body>
