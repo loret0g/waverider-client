@@ -12,8 +12,11 @@ function AuthWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [loggedUserId, setLoggedUserId] = useState(null)
   const [isValidatingToken, setIsValidatingToken] = useState(true)  // spinner para que espere que se compruebe
-  //! estado para el rol
+  
   const [loggedUserRole, setLoggedUserRole] = useState(null)
+  const [loggedUserName, setLoggedUserName] = useState("")
+  const [loggedUserPhoto, setLoggedUserPhoto] = useState("")
+  
 
   useEffect(() => {
     authenticatedUser() // Verifica si el usuario está logeado cuando visita la página
@@ -25,13 +28,24 @@ function AuthWrapper(props) {
     try {
 
       const response = await service.get("auth/verify")   // el token ya está configurado en todas las llamadas que se hagan con ese service 
-
-      // console.log(response) 
       
-      // el token es válido
+      // el token es válido - Almaceno en el payload
       setIsLoggedIn(true)
-      setLoggedUserId(response.data._id)    // Comprobado desde el back, que nos envía el payload
+      setLoggedUserId(response.data._id)
       setLoggedUserRole(response.data.role)
+
+      // Llamada para almacenar datos del usuario y que no vayan en el token (payload):
+      if (response.data.role === "owner") {
+        const ownerDetails = await service.get(`/owner/${response.data._id}`);
+        // console.log("Owner details: ", ownerDetails.data.owner.username)
+        setLoggedUserName(ownerDetails.data.owner.username)
+        setLoggedUserPhoto(ownerDetails.data.owner.photo);
+      } else if(response.data.role === "user") {
+        const userDetails = await service.get(`/profile/${response.data._id}`);
+        setLoggedUserName(userDetails.data.username)
+        setLoggedUserPhoto(userDetails.data.photo);
+      }
+
       setIsValidatingToken(false)
 
     } catch (error) {
@@ -40,6 +54,8 @@ function AuthWrapper(props) {
       setIsLoggedIn(false)
       setLoggedUserId(null)
       setLoggedUserRole(null)
+      setLoggedUserName("")
+      setLoggedUserPhoto("")
       setIsValidatingToken(false)
     }
   }
@@ -48,6 +64,8 @@ function AuthWrapper(props) {
     isLoggedIn,
     loggedUserId,
     loggedUserRole,
+    loggedUserName,
+    loggedUserPhoto,
     authenticatedUser
   }
 

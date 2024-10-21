@@ -23,7 +23,7 @@ function UserProfile() {
     try {
       const response = await service.get(`/profile/${userId}`);
       setUser(response.data);
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.log(error);
     }

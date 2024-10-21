@@ -5,7 +5,7 @@ import { Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 
-import Navbar from "./components/Navbar"
+import MyNavbar from "./components/MyNavbar"
 
 import HomePage from "./pages/HomePage"
 import Login from "./pages/auth/Login"
@@ -21,7 +21,7 @@ function App() {
 
   return (
     <div id="container">
-      <Navbar />
+      <MyNavbar />
 
       <Routes>
         <Route path="/" element={<HomePage />} />
