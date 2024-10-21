@@ -21,7 +21,7 @@ function Navbar() {
   return (
     <>
     <nav id="navbar">
-    <Link to="/">Home</Link>
+      <Link to="/"><img src="/logo.png" alt="Company Logo" /></Link>
       {!isLoggedIn && <Link to="/signup">Registro</Link>}
       {!isLoggedIn && <Link to="/login">Acceso</Link>}
       {/* {isLoggedIn && <Link to="/profile">Perfil</Link>} */}

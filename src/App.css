@@ -30,13 +30,34 @@ a {
   height: 4rem;
 }
 
-/** HOMEPAGE */
-#homepage-container {
-  /* background-color: #000; */
+#navbar img {
+  width: 150px;
 }
 
-#homepage-container h1 {
-  text-align: center;
+/** HOMEPAGE */
+.homepage-container {
+  /* margin: 4rem; */
+}
+
+.sort-container {
+  display: flex;
+  justify-content: left;
+  margin: 1.5rem;
+}
+
+.sort-button {
+  background-color: var(--background-color);
+  color: white;
+  /* font-size: 1rem; */
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  transition: background-color 0.3s ease;
+}
+
+.sort-button:hover {
+  background-color: var(--primary);
+  color: var(--background-color);
 }
 
 .container-jetski {
