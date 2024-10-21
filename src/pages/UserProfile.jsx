@@ -65,7 +65,11 @@ function UserProfile() {
           {(loggedUserId === user._id || hasReservationWithUser) && (
             <>
               <h3>{user.email}</h3>
-              <h3>{user.phoneNumber}</h3>
+              <h3>
+                {user.phoneNumber ? user.phoneNumber
+                  : loggedUserId === user._id ? "Añade tu número de teléfono"
+                  : "El usuario no ha proporcionado un número de teléfono."}
+              </h3>
             </>
           )}
         </div>

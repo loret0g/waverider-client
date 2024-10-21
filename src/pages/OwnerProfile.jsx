@@ -69,9 +69,13 @@ function OwnerProfile() {
           <h2>{owner.username}</h2>
           {(loggedUserId === owner._id || hasReservationWithOwner) && (
             <>
-              <h3>{owner.email}</h3>
-              <h3>{owner.phoneNumber}</h3>
-            </>
+            <h3>{owner.email}</h3>
+            <h3>
+              {owner.phoneNumber ? owner.phoneNumber
+                : loggedUserId === owner._id ? "Añade tu número de teléfono"
+                : "El usuario no ha proporcionado un número de teléfono."}
+            </h3>
+          </>
           )}
         </div>
       </div>
