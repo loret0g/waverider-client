@@ -10,12 +10,18 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("")
   const [isOwner, setIsOwner] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSignup = async (e) => {
     e.preventDefault();
+
+    if(password != confirmPassword) {
+      setErrorMessage("Las contraseñas no coinciden.")
+      return
+    }
 
     const role = isOwner ? "owner" : "user";
 
@@ -72,6 +78,15 @@ function Signup() {
           name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <label className="form-label">Repite la contraseña:</label>
+        <input
+          className="form-input"
+          type="password"
+          name="confirmPassword"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
         />
 
         {errorMessage && <p className="error-message">{errorMessage}</p>}
