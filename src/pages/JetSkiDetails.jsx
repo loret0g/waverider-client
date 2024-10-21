@@ -75,7 +75,14 @@ function JetSkiDetails() {
       <div className="jetski-header">
         <h1>{jetSki.name}</h1>
         <Link to={`/owner/${jetSki.owner._id}`} onClick={handleOwnerClick}>
-          <h2>{jetSki.owner.username}</h2>
+          <div className="owner-container">
+            <h2>{jetSki.owner.username}</h2>
+            <img
+              src={jetSki.owner.photo}
+              alt="Foto propietario"
+              id="owner-photo"
+            />
+          </div>
         </Link>
       </div>
 
@@ -83,8 +90,8 @@ function JetSkiDetails() {
         <p>{jetSki.description}</p>
 
         {/* Condición según autenticación */}
-        <div className="reservation-container">
-          <h2 className="price"> {jetSki.price}€</h2>
+        <div className="reservation-jetski-details">
+          <h2> {jetSki.price}€</h2>
 
           {isLoggedIn ? (
             <div className="date-reservation">
@@ -110,20 +117,22 @@ function JetSkiDetails() {
               </button>
             </div>
           ) : (
-            <div className="login-reservation">
+            <>
               <p>Solo los usuarios registrados pueden reservar</p>
-              <Button variant="primary" as={Link} to="/login">
-                Inicia sesión
-              </Button>
-              <Button
-                variant="secondary"
-                as={Link}
-                to="/signup"
-                className="ms-2"
-              >
-                Regístrate
-              </Button>
-            </div>
+              <div>
+                <Button variant="primary" as={Link} to="/login">
+                  Inicia sesión
+                </Button>
+                <Button
+                  variant="secondary"
+                  as={Link}
+                  to="/signup"
+                  className="ms-2"
+                >
+                  Regístrate
+                </Button>
+              </div>
+            </>
           )}
         </div>
       </div>
