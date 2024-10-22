@@ -83,7 +83,7 @@ function MyNavbar() {
                     loggedUserRole === "owner" ? "owner" : "profile"
                   }/${loggedUserId}`}
                 >
-                  Ver Perfil
+                  Mi perfil
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={handleLogout}>

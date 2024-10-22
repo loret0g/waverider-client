@@ -24,8 +24,6 @@ a {
 
 .video {
   position: relative;
-  min-height: 50rem;
-  max-height: 70rem;
   overflow: hidden;
 }
 
@@ -40,24 +38,22 @@ a {
 /* Texto superpuesto en el video */
 .overlay {
   position: absolute;
-  bottom: 80px;
+  bottom: 0;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 0.5rem 1rem;
+  text-align: center;
+  width: max-content;
+  padding: 0.5rem 2rem;
   border-radius: 12px;
-  background-color: var(--primary);
+  background-color: #3a6d8ce9;
+  color: var(--sand);
   /* background-color: rgba(21, 66, 102, 0.884); */
 }
 
 .overlay a {
-  color: var(--sand);
+  /* color: var(--sand) !important; */
   font-size: 1.5rem;
   font-weight: bold;
-}
-
-#jetski-section {
-  padding-top: 280px; /* Ajusta este valor según el tamaño del navbar o de la parte que quieras dejar visible */
-  margin-top: -280px; /* Con esto ajustamos el desplazamiento para que quede justo donde quieres */
 }
 
 /***********************************************/
@@ -66,10 +62,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* background-color: #333333d5; */
-  /* background-color: rgba(0, 0, 0, 0.6); */
   background-color: #001f3fdf;
-  /* background-color: #001529e3; */
   padding: 0.4rem 2rem;
   margin-left: auto;
 
@@ -98,7 +91,6 @@ a {
   border-radius: 50%;
 }
 
-
 /* Clases de Bootstrap */
 .navbar {
   background-color: var(--sand);
@@ -114,14 +106,15 @@ a {
   left: 0 !important; /* Alineado con el contenedor padre */
   right: 0 !important;
   min-width: 100% !important;
-  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1), 
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1),
               0px 4px 6px 0px rgba(0, 0, 0, 0.1);
-  text-align: center !important;
+  /* text-align: center !important; */
   border-radius: 0 0 10px 10px !important;
 }
 
-.dropdown-item {
-  padding: 10px 20px;
+a.dropdown-item {
+  padding: 0;
+  text-align: center;
 }
 
 .dropdown-item:hover {
@@ -176,7 +169,17 @@ a {
 /*********************************************/
 /** HOMEPAGE */
 .homepage-container {
-  /* margin: 4rem; */
+  margin-top: 6rem;
+}
+
+@media (min-width: 400px) {
+  .homepage-container {
+    margin-top: 8.6rem;
+  }
+}
+
+.homepage-container  p {
+  color: var(--sand);
 }
 
 .sort-container {
@@ -211,11 +214,13 @@ a {
 .jetski-card {
   background-color: var(--sand);
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  max-width: 300px;
+  max-width: 270px;
   width: 100%;
   text-align: center;
   overflow: hidden;
+}
+.jetski-card:hover {
+  box-shadow: 0px 4px 10px var(--primary);
 }
 
 .jetski-card img {
@@ -223,22 +228,18 @@ a {
   height: 200px;
 }
 
-.jetski-card h3 {
-  font-size: 1.2rem;
-  margin: 10px 0;
-}
-
+/* Título */
 .jetski-card a p {
-  color: var(--primary);
+  display: flex;
+  justify-content: space-between;
+  color: var(--background-color);
   font-weight: bold;
+  padding: 0.5rem 1rem;
+  margin: 0;
 }
-
-.jetski-card .price {
-  /* margin-bottom: 1rem; */
-}
-
-.jetski-card:hover {
-  /* box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); */
+/* Precio */
+.jetski-card a p span{
+  color: var(--primary);
 }
 
 /**************************************************/
@@ -248,10 +249,25 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 10px;
   margin: 1rem;
+  margin-top: 9.5rem;
   border-radius: 12px;
+  background-color: var(--background-color);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+@media (min-width: 600px) {
+    
+}
+.jetski-details {
+
+}
+
+/* Contenedor para la foto, el título y el propietario */
+.jetski-pic-owner {
+  background-color: #001931;
+  border-radius: 12px;
+  padding: 0.2rem;
 }
 
 .jetski-details img {
@@ -259,7 +275,7 @@ a {
   max-height: 500px;
   object-fit: cover;
   object-position: center;
-  border-radius: 12px;
+  border-radius: 8px 8px 0 0;
 }
 
 .jetski-header {
@@ -269,16 +285,15 @@ a {
   gap: 10px;
   align-items: center;
   justify-content: center;
-  margin: 0.5rem auto;
-  background-color: var(--primary);
-  border-radius: 12px;
-  padding: 0.4rem 0.5rem;
+  margin: 0.2rem auto;
+  padding: 0.4rem 0.9rem;
   flex-wrap: wrap;
 }
 
 .jetski-header h2, .jetski-header h1 {
   margin: 0;
   font-size: 1rem;
+  color: #fff;
 }
 
 .owner-container {
@@ -303,12 +318,13 @@ a {
 }
 
 .jetski-info p {
-  padding-right: 2rem;
+  /* padding-right: 2rem; */
+  padding: 0.5rem;
   white-space: pre-line;
+  color: var(--sand);
 }
 
 /* Contenedor de la reserva a la derecha */
-/* Para el contenedor de reserva */
 .reservation-jetski-details {
   max-width: 100%;
   background-color: #f5f5f5;
@@ -328,13 +344,20 @@ a {
 }
 
 .reservation-jetski-details h2 {    /* Precio */
-  /* width: 100%; */    
-  /* text-align: center; */
+  /* width: 100%;
+  text-align: center; */
   font-size: 1rem;
   padding: 0.4rem 1rem;
   font-weight: bold;
   background-color: var(--primary);
+  color: #fff;
+  background-color: var(--sand);
+  color: #000;
   border-radius: 8px;
+}
+
+.date-reservation {
+  margin: 0;
 }
 
 .date-reservation input {
@@ -344,6 +367,7 @@ a {
   border-radius: 8px;
   border: 1px solid #ddd;
   text-align: center;
+  /* margin: 0.5rem; */
 }
 
 .btn-reserve {
@@ -360,7 +384,7 @@ a {
 
 .btn-reserve h4 {
   margin: 0;
-  font-size: 1rem;  /* subir en pantallas grandes*/
+  font-size: 1rem;
 }
 
 .btn-reserve:disabled {
@@ -369,16 +393,34 @@ a {
 }
 
 /* Sección reserva si no está autenticado */
-.reservation-jetski-details p {
+.reservation-jetski-details p {   /* Texto de "aviso" */
   text-align: center;
   padding: 0;
+  color: #000;
 }
-.reservation-jetski-details div {
+
+.reservation-jetski-details #no-log {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
+  align-items: center;
+  /* flex-wrap: wrap; */
+  gap: 0.5rem;
 }
+
+#btn-1 {
+  background-color: var(--secondary);
+  border: none;
+}
+
+#btn-2 {
+  background-color: var(--primary);
+  border: none;
+}
+#btn-1:hover, #btn-2:hover {
+  background-color: #001F3F;
+  color: var(--sand) !important;
+}
+
 
 /* MEDIA QUERIES */
 @media (min-width: 370px) {
@@ -390,7 +432,12 @@ a {
 
 @media (min-width: 900px) {
   .jetski-details {   /*Contenedor padre*/
-    margin: 2rem 6rem;
+    /* margin: 5.5rem auto; */
+    margin: 3rem 10rem;
+  }
+
+  .jetski-pic-owner {
+    width: 100%;
   }
 
   .jetski-header h1, .jetski-header h2 {
@@ -409,13 +456,14 @@ a {
   }
 
   .reservation-jetski-details {
-    max-width: 100%;
+    width: 40%;
+    margin: 0 0rem 0rem 1rem;
   }
 
   .reservation-jetski-details h2 {    /* Precio */
-    font-size: 1.8rem; 
+    font-size: 1.6rem;
     padding: 0.7rem 1.4rem;
-    
+
     text-align: center;
   }
 
@@ -424,13 +472,11 @@ a {
   }
 
   .btn-reserve {
-    /* padding: 0.8rem 1.5rem; */
     padding: 0.9rem 1.8rem;
   }
-  
+
   .btn-reserve h4 {
     margin: 0;
-    font-size: 1.2rem;  /* subir en pantallas grandes*/
   }
 }
 
@@ -649,11 +695,17 @@ a {
 
 /* Formulario de registro */
 .form-container {
+  margin-top: 8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 1rem;
+}
+@media (min-width: 600px) {
+  .form-container {
+    margin-top: 4.5rem;
+  }
 }
 
 .form-title {

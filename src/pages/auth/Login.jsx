@@ -50,7 +50,7 @@ function Login() {
 
   return (
     <div className="form-container">
-      <h1 className="form-title">Formulario de Acceso</h1>
+      {/* <h1 className="form-title">Formulario de Acceso</h1> */}
 
       <form onSubmit={handleLogin} className="form">
         <label className="form-label">Correo Electrónico:</label>

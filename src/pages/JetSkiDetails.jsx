@@ -68,22 +68,24 @@ function JetSkiDetails() {
 
   return (
     <div className="jetski-details">
-      {jetSki.images.length > 0 && (
-        <img src={jetSki.images[0]} alt={jetSki.name} />
-      )}
+      <div className="jetski-pic-owner">
+        {jetSki.images.length > 0 && (
+          <img src={jetSki.images[0]} alt={jetSki.name} />
+        )}
 
-      <div className="jetski-header">
-        <h1>{jetSki.name}</h1>
-        <Link to={`/owner/${jetSki.owner._id}`} onClick={handleOwnerClick}>
-          <div className="owner-container">
-            <h2>{jetSki.owner.username}</h2>
-            <img
-              src={jetSki.owner.photo}
-              alt="Foto propietario"
-              id="owner-photo"
-            />
-          </div>
-        </Link>
+        <div className="jetski-header">
+          <h1>{jetSki.name}</h1>
+          <Link to={`/owner/${jetSki.owner._id}`} onClick={handleOwnerClick}>
+            <div className="owner-container">
+              <h2>{jetSki.owner.username}</h2>
+              <img
+                src={jetSki.owner.photo}
+                alt="Foto propietario"
+                id="owner-photo"
+              />
+            </div>
+          </Link>
+        </div>
       </div>
 
       <div className="jetski-info">
@@ -119,12 +121,12 @@ function JetSkiDetails() {
           ) : (
             <>
               <p>Solo los usuarios registrados pueden reservar</p>
-              <div>
-                <Button variant="primary" as={Link} to="/login">
+              <div id="no-log">
+                <Button id="btn-1" as={Link} to="/login">
                   Inicia sesión
                 </Button>
                 <Button
-                  variant="secondary"
+                  id="btn-2"
                   as={Link}
                   to="/signup"
                   className="ms-2"
@@ -145,10 +147,10 @@ function JetSkiDetails() {
           Debes iniciar sesión para poder acceder al perfil del propietario
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="info" as={Link} to="/login">
+          <Button id="btn-1" as={Link} to="/login">
             Inicia sesión
           </Button>
-          <Button variant="info" as={Link} to="/signup">
+          <Button id="btn-2" as={Link} to="/signup">
             Regístrate
           </Button>
           <Button variant="secondary" onClick={handleCloseWarning}>

@@ -12,8 +12,7 @@ function JetSkiCard({ jetSki, getData, isOwnerView }) {
           {jetSki.images.length > 0 && (
             <img src={jetSki.images[0]} alt={jetSki.name} />
           )}
-          <h3>{jetSki.name}</h3>
-          <p>{jetSki.price} €</p>
+          <p>{jetSki.name} <span>{jetSki.price} €</span></p>
         </Link>
         {isOwnerView && <EditJetSkiModal jetSki={jetSki} getData={getData} />}
       </div>
