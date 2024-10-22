@@ -42,24 +42,12 @@ function UserProfile() {
     (eachReservation) => eachReservation.user._id === userId
   );
 
-  if (!user) return <p>Loading...</p>;
-  if (!reservations) return <p>Loading...</p>;
+  if (!user || !reservations) return <p>Loading...</p>;
 
   return (
     <div className="user-profile">
       <div className="user-details">
-        <div>
           <img src={user.photo} alt="Foto de perfil" />
-          {loggedUserId === user._id && (
-            <div className="owner-actions">
-              <EditUserModal
-                userId={loggedUserId}
-                userData={user}
-                getData={getProfile}
-              />
-            </div>
-          )}
-        </div>
         <div className="user-data">
           <h2>{user.username}</h2>
           {(loggedUserId === user._id || hasReservationWithUser) && (
@@ -73,6 +61,15 @@ function UserProfile() {
             </>
           )}
         </div>
+        {loggedUserId === user._id && (
+            <div className="owner-actions">
+              <EditUserModal
+                userId={loggedUserId}
+                userData={user}
+                getData={getProfile}
+              />
+            </div>
+          )}
       </div>
 
       {loggedUserId === user._id && (

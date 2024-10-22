@@ -90,7 +90,7 @@ function EditJetSkiModal({ jetSki, getData }) {
   return (
     <>
       <Button
-        variant="secondary"
+        id="btn-2"
         onClick={handleShow}
         style={{ marginBottom: "1rem" }}
       >

@@ -45,26 +45,12 @@ function OwnerProfile() {
     (eachReservation) => eachReservation.owner._id === ownerId
   );
 
-  if (!owner) return <p>Loading...</p>;
+  if (!owner || !jetSki || !reservations) return <p>Loading...</p>;
 
   return (
     <div className="user-profile">
-      
-
-
       <div className="user-details">
-        <div>
           <img src={owner.photo} alt="Foto de perfil" />
-          {loggedUserId === ownerId && (
-            <div className="owner-actions">
-              <EditUserModal
-                userId={ownerId}
-                userData={owner}
-                getData={getProfile}
-              />
-            </div>
-          )}
-        </div>
         <div className="user-data">
           <h2>{owner.username}</h2>
           {(loggedUserId === owner._id || hasReservationWithOwner) && (
@@ -78,6 +64,15 @@ function OwnerProfile() {
           </>
           )}
         </div>
+        {loggedUserId === ownerId && (
+            <div className="owner-actions">
+              <EditUserModal
+                userId={ownerId}
+                userData={owner}
+                getData={getProfile}
+              />
+            </div>
+          )}
       </div>
 
       <div className="owner-jetskis">

@@ -75,7 +75,7 @@ function EditUserModal({ userId, userData, getData }) {
     <>
       {/* Mostrar botón solo si el usuario logueado es el propietario */}
       {loggedUserId === userId && (
-        <Button variant="primary" onClick={handleShow}>
+        <Button id="btn-2" onClick={handleShow}>
           Editar perfil
         </Button>
       )}

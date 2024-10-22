@@ -399,7 +399,7 @@ a.dropdown-item {
   color: #000;
 }
 
-.reservation-jetski-details #no-log {
+.reservation-jetski-details #no-log { /* Caja con botones para loguearse */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -483,7 +483,7 @@ a.dropdown-item {
 /**************************************************/
 /** Perfiles */
 .user-profile {
-  margin: 0 1rem;
+  margin: 8rem 1rem;
 }
 @media (min-width: 768px) {
   .user-profile {
@@ -492,16 +492,16 @@ a.dropdown-item {
 }
 
 .user-details {
-  width: 100%;
-  background-color: #f5f5f5;
-  padding: 1rem 0;
-  text-align: center;
-  margin: 2rem 0;
-  border-radius: 8px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* gap: 2rem; */
+  width: max-content;
+  width: 100%;
+  background-color: #cccccc;
+  padding: 1rem 0;
+  text-align: center;
+  margin: 2rem auto;
+  border-radius: 8px;
 }
 
 .user-details img {
@@ -514,13 +514,19 @@ a.dropdown-item {
 
 .user-data {
   text-align: center;
-  width: 100%;
-  padding: 1rem;
+  padding: 0.8rem;;
 }
-@media (min-width: 768px) {
+
+.user-data h2, .user-data h3 {
+  font-size: 1.3rem;
+}
+@media (min-width: 830px) {
   .user-details {
     flex-direction: row;
-    padding: 1rem;
+    width: max-content;
+    margin: 6rem auto 0;
+    /* padding: 1rem; */
+    flex-wrap: wrap;
   }
 
   .user-details img {
@@ -532,16 +538,17 @@ a.dropdown-item {
   .user-data {
     text-align: left;
   }
-}
 
-.owner-actions {
-  /* background-color: #000;
-  display: block; */
+  .owner-actions {
+    width: 100%;
+    text-align: right;
+    padding-right: 1rem;
+  }
 }
 
 
 /**************************************************/
-/* Perfiles -- Contenedor motos y reservas */
+/* Perfiles -- Contenedor motos (solo propietario) */
 .owner-jetskis {
   width: 100%;
   background-color: #001F3F;
@@ -550,9 +557,6 @@ a.dropdown-item {
   margin-bottom: 2rem;
   margin-top: 2rem;
   padding: 1rem;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* align-items: center; */
 }
 
 .owner-jetskis h2 {
@@ -567,7 +571,7 @@ a.dropdown-item {
   color: #fff;
 }
 
-/* RESERVAS desde el perfil */
+/* Perfiles -- Contenedor reservas */
 .reservation-container {
   background-color: #f5f5f5;
   padding: 1rem;
