@@ -81,7 +81,7 @@ function UserProfile() {
             reservations.map((eachReservation) => (
               <div key={eachReservation._id} className="reservation-card">
                 {/* Información principal de la moto y la reserva */}
-                <div className="reservation-details">
+                <div className="reservation-header">
                   <h3>
                     {eachReservation.jetSki
                       ? eachReservation.jetSki.name

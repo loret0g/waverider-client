@@ -556,25 +556,26 @@ a.dropdown-item {
   border-radius: 12px;
   margin-bottom: 2rem;
   margin-top: 2rem;
-  padding: 1rem;
 }
 
-.owner-jetskis h2 {
+.owner-jetskis h2, .reservation-container h2 {
   text-align: center;
-  margin-bottom: 1.5rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  padding: 1rem;
   color: #ccc;
-  font-weight: 600;
+  /* font-weight: 600; */
 }
 
-.owner-jetskis p {
+.owner-jetskis p {  /* Por si no existen vehículos en el perfil */
   color: #fff;
 }
 
 /* Perfiles -- Contenedor reservas */
 .reservation-container {
-  background-color: #f5f5f5;
-  padding: 1rem;
+  /* background-color: #f5f5f5; */
+  /* background-color: #011224;
+  background-color: #001F3F; */
+  /* padding: 1rem; */
   border-radius: 12px;
   min-width: 200px;
   display: flex;
@@ -583,6 +584,7 @@ a.dropdown-item {
   margin-bottom: 1rem;
   width: 100%;
 }
+
 
 .reservation-card {
   display: flex;
@@ -593,54 +595,57 @@ a.dropdown-item {
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   border-radius: 12px;
-  width: 80%;
+  width: 100%;
 
 }
 
-.reservation-details {
+.reservation-header {
   margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
 }
 
-.reservation-details h3 {
+.reservation-header h3 {
   font-size: 1.4rem;
   margin: 0;
   color: var(--background-color);
   font-weight: 700;
 }
 
-.price {
-  font-size: 1rem;
-  padding: 0.4rem 1rem;
-  font-weight: bold;
+.price-section .price {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 0;
+  color: var(--sand);
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-align: right;
   background-color: var(--primary);
+  padding: 0.2rem 1rem;
   border-radius: 8px;
 }
 
 @media (min-width: 768px) {
-  .reservation-details h3 {
-    font-size: 1.8rem;
+  .reservation-header h3 {
+    font-size: 1.5rem;
   }
 }
 
-.reservation-card p {
-  color: #000;
-  text-align: left;
-}
-
 /** Clases de bootstrap para el acordeon */
+.accordion-header {
+  padding: 0 !important;
+}
+.accordion-header h4 {
+  margin: 0 !important;
+}
 .accordion-button {
-  padding: 0.5rem !important;
-  background-color: #00000026 !important;
-  /* margin-bottom: 1rem !important; */
+  padding: 0.5rem 1rem !important;
+  background-color: #00000052 !important;
 }
 .accordion-button:not(.collapsed) {
   background-color: var(--secondary) !important;
 }
 .accordion-button:focus {
-  z-index: 3;
-  outline: 0;
   box-shadow: var(--sand) !important;
 }
 .accordion-body {
@@ -649,33 +654,12 @@ a.dropdown-item {
   margin: 0 !important;
 }
 
-/* .accordion-body p {
-  color: red;
-} */
-
-/* Sección del precio */
-.price-section {
-  margin-top: 1rem;
-  text-align: right;
-}
-
-.price-section .price {
-  color: var(--sand);
-  font-size: 1.4rem;
-  font-weight: 600;
-  text-align: right;
-}
-
 /** FOOTER */
 #footer {
   margin-top: auto; /* Para que se quede abajo siempre. Da igual el contenido */
   text-align: center;
   padding: 1rem;
-  background-color: #333;
   background-color: #001F3F;
-  color: #a5a5a5;
-  color: #000;
-  color: #fff;
   color: var(--primary);
 }
 

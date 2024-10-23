@@ -106,7 +106,7 @@ function OwnerProfile() {
           ) : (
             reservations.map((eachReservation) => (
               <div key={eachReservation._id} className="reservation-card">
-                <div className="reservation-details">
+                <div className="reservation-header">
                   <h3>
                     {eachReservation.jetSki
                       ? eachReservation.jetSki.name
@@ -123,7 +123,7 @@ function OwnerProfile() {
                 {/* Contacto del cliente */}
                 <Accordion>
                   <Accordion.Item eventKey="0">
-                    <Accordion.Header style={{ padding: "0", margin: "0" }}>
+                    <Accordion.Header>
                       <h4>Contacta con el cliente</h4>
                     </Accordion.Header>
                     <Accordion.Body>
@@ -152,7 +152,7 @@ function OwnerProfile() {
                 </Accordion>
 
                 <div className="price-section">
-                  <p className="price">Precio: {eachReservation.price}€</p>
+                  <p className="price">{eachReservation.price}€</p>
                 </div>
               </div>
             ))
