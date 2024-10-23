@@ -1,8 +1,9 @@
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Modal from "react-bootstrap/Modal";
 import service from "../services/config";
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { PuffLoader } from "react-spinners";
 
 function EditJetSkiModal({ jetSki, getData }) {
   const [show, setShow] = useState(false);
@@ -82,8 +83,10 @@ function EditJetSkiModal({ jetSki, getData }) {
       setImageUrl(response.data.imageUrl);
       setFormData({ ...formData, images: response.data.imageUrl });
       setIsUploading(false);
+      setErrorMessage("");
     } catch (error) {
-      navigate("/error");
+      setErrorMessage("Hubo un problema al subir la imagen. Inténtalo de nuevo.");
+      setIsUploading(false);
     }
   };
 
@@ -142,16 +145,18 @@ function EditJetSkiModal({ jetSki, getData }) {
                     onChange={handleFileUpload}
                     disabled={isUploading}
                   />
-                  {isUploading ? <h3>... uploading image</h3> : null}
-                  {imageUrl ? (
-                    <div>
-                      <img src={imageUrl} alt="img" width={200} />
-                    </div>
-                  ) : null}
+                  <div className="modal-spinner">
+                    {isUploading ? <PuffLoader color="#689BB0" margin={5} size={20} /> : null}
+                    {imageUrl ? (
+                      <div>
+                        <img src={imageUrl} alt="img" width={200} />
+                      </div>
+                    ) : null}
+                  </div>
                 </Form.Group>
               </Form>
               {errorMessage && (
-                <p style={{ color: "red", marginTop: "1rem" }}>
+                <p className="error-message">
                   {errorMessage}
                 </p>
               )}

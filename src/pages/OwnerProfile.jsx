@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
+import { PropagateLoader } from "react-spinners";
+
 
 import service from "../services/config";
 import { AuthContext } from "../context/auth.context";
@@ -45,8 +47,15 @@ function OwnerProfile() {
     (eachReservation) => eachReservation.owner._id === ownerId
   );
 
-  if (!owner || !jetSki || !reservations) return <p>Loading...</p>;
-
+  if (!owner || !jetSki || !reservations) {
+    return (
+      <div className="loading-screen">
+        <h3>Cargando perfil...</h3>
+        <PropagateLoader color="#EAD8B1" margin={5} size={20} />
+      </div>
+    );
+  }
+  
   return (
     <div className="user-profile">
       <div className="user-details">
@@ -120,15 +129,12 @@ function OwnerProfile() {
                   </h3>
                 </div>
 
-                {/* Contacto del cliente */}
                 <Accordion>
                   <Accordion.Item eventKey="0">
                     <Accordion.Header>
                       <h4>Contacta con el cliente</h4>
                     </Accordion.Header>
                     <Accordion.Body>
-                      {/* Link al perfil del cliente */}
-                      {console.log(eachReservation.user._id)}
                       <Link to={`/profile/${eachReservation.user._id}`}>
                         <p>
                           <i className="fas fa-user"></i>{" "}
@@ -137,12 +143,10 @@ function OwnerProfile() {
                           </span>
                         </p>
                       </Link>
-                      {/* Email del cliente */}
                       <p>
                         <i className="fas fa-envelope"></i>{" "}
                         {eachReservation.user.email}
                       </p>
-                      {/* Teléfono del cliente */}
                       <p>
                         <i className="fas fa-phone"></i>{" "}
                         {eachReservation.user.phoneNumber || "No disponible"}

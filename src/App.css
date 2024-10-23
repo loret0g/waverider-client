@@ -174,7 +174,7 @@ a.dropdown-item {
 
 @media (min-width: 400px) {
   .homepage-container {
-    margin-top: 8.6rem;
+    margin: 8.6rem 2rem 0;
   }
 }
 
@@ -834,4 +834,33 @@ a.dropdown-item {
 
 .go-home-btn:hover {
   background-color: #d93e1b;
+}
+
+/****************************************************/
+/* Spinners / pantallas de carga*/
+/* Para el authContext que valida credenciales y cargar los perfiles */
+  .loading-screen {
+    background-color: #001529;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .loading-screen h3 {
+    color: var(--sand);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+/* Modales */
+.modal-spinner {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-spinner img{
+  border-radius: 12px;
 }

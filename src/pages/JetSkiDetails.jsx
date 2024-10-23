@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import service from "../services/config";
 import { Modal, Button } from "react-bootstrap";
+import { PropagateLoader } from "react-spinners";
 
 function JetSkiDetails() {
   const { isLoggedIn, loggedUserRole, loggedUserId } = useContext(AuthContext);
@@ -64,7 +65,14 @@ function JetSkiDetails() {
 
   const handleCloseWarning = () => setShowWarning(false);
 
-  if (!jetSki) return <p>Loading...</p>;
+  if (!jetSki) {
+    return (
+      <div className="loading-screen">
+        <h3>Espera un momento...</h3>
+        <PropagateLoader color="#EAD8B1" margin={5} size={20} />
+      </div>
+    );
+  }
 
   return (
     <div className="jetski-details">

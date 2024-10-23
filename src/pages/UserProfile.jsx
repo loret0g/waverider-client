@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import service from "../services/config";
 import { AuthContext } from "../context/auth.context";
 import Accordion from "react-bootstrap/Accordion";
+import { PropagateLoader } from "react-spinners";
 
 import EditUserModal from "../components/EditUserModal";
 import { Link, useParams } from "react-router-dom";
@@ -23,7 +24,6 @@ function UserProfile() {
     try {
       const response = await service.get(`/profile/${userId}`);
       setUser(response.data);
-      // console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +42,14 @@ function UserProfile() {
     (eachReservation) => eachReservation.user._id === userId
   );
 
-  if (!user || !reservations) return <p>Loading...</p>;
+  if (!user || !reservations) {
+    return (
+      <div className="loading-screen">
+        <h3>Cargando perfil...</h3>
+        <PropagateLoader color="#EAD8B1" margin={5} size={20} />
+      </div>
+    );
+  }
 
   return (
     <div className="user-profile">

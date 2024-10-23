@@ -1,12 +1,13 @@
 import { useState, useContext } from "react";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import service from "../services/config";
 import { AuthContext } from "../context/auth.context";
+import Button from "react-bootstrap/Button";
+import { PuffLoader } from "react-spinners";
 
 function EditUserModal({ userId, userData, getData }) {
-  const { loggedUserId } = useContext(AuthContext);
+  const { loggedUserId, updateLoggedUserPhoto } = useContext(AuthContext);
 
   const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({
@@ -64,10 +65,12 @@ function EditUserModal({ userId, userData, getData }) {
 
       setImageUrl(response.data.imageUrl);
       setFormData({ ...formData, photo: response.data.imageUrl });
+      updateLoggedUserPhoto(response.data.imageUrl);  // Actualizo la foto de perfil en el navbar
       setIsUploading(false);
+      setErrorMessage("");
     } catch (error) {
-      // navigate("/error");
-      console.log(error)
+      setErrorMessage("Hubo un problema al subir la imagen. Inténtalo de nuevo.");
+      setIsUploading(false);
     }
   };
 
@@ -122,12 +125,14 @@ function EditUserModal({ userId, userData, getData }) {
                     onChange={handleFileUpload}
                     disabled={isUploading}
                   />
-                  {isUploading ? <h3>... uploading image</h3> : null}
-                  {imageUrl ? (
-                    <div>
-                      <img src={imageUrl} alt="img" width={200} />
-                    </div>
-                  ) : null}
+                  <div className="modal-spinner">
+                    {isUploading ? <PuffLoader color="#689BB0" margin={5} size={20} /> : null}
+                    {imageUrl ? (
+                      <div>
+                        <img src={imageUrl} alt="img" width={200} />
+                      </div>
+                    ) : null}
+                  </div>
                 </Form.Group>
           </Form>
 
