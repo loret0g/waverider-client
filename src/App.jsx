@@ -34,7 +34,7 @@ function App() {
         <Route path="/jet-ski/:jetSkiId" element={<JetSkiDetails/>} />
 
 
-        <Route path='/not-found' element={<NotFound/>} />
+        <Route path='*' element={<NotFound/>} />
 
       </Routes>
 
