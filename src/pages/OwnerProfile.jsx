@@ -154,7 +154,7 @@ function OwnerProfile() {
                       </p>
                       <Link to={`/jet-ski/${eachReservation.jetSki._id}`}>
                         <p>
-                          <i className="fas fa-anchor"></i>{" "}
+                          <i className="fas fa-ship"></i>{" "}
                           <span style={{ color: "#3A6D8C" }}>
                             Ver moto
                           </span>

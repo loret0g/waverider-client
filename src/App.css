@@ -256,12 +256,6 @@ a.dropdown-item {
   background-color: var(--background-color);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
-@media (min-width: 600px) {
-    
-}
-.jetski-details {
-
-}
 
 /* Contenedor para la foto, el título y el propietario */
 .jetski-pic-owner {
