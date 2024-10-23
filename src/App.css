@@ -584,6 +584,9 @@ a.dropdown-item {
   margin-bottom: 1rem;
   width: 100%;
 }
+.reservation-container h2 p {
+  color: #fff;
+}
 
 
 .reservation-card {

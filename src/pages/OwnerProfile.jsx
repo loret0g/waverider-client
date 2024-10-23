@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import { PropagateLoader } from "react-spinners";
 
-
 import service from "../services/config";
 import { AuthContext } from "../context/auth.context";
 
@@ -55,33 +54,35 @@ function OwnerProfile() {
       </div>
     );
   }
-  
+
   return (
     <div className="user-profile">
       <div className="user-details">
-          <img src={owner.photo} alt="Foto de perfil" />
+        <img src={owner.photo} alt="Foto de perfil" />
         <div className="user-data">
           <h2>{owner.username}</h2>
           {(loggedUserId === owner._id || hasReservationWithOwner) && (
             <>
-            <h3>{owner.email}</h3>
-            <h3>
-              {owner.phoneNumber ? owner.phoneNumber
-                : loggedUserId === owner._id ? "Añade tu número de teléfono"
-                : "El usuario no ha proporcionado un número de teléfono."}
-            </h3>
-          </>
+              <h3>{owner.email}</h3>
+              <h3>
+                {owner.phoneNumber
+                  ? owner.phoneNumber
+                  : loggedUserId === owner._id
+                  ? "Añade tu número de teléfono"
+                  : "El usuario no ha proporcionado un número de teléfono."}
+              </h3>
+            </>
           )}
         </div>
         {loggedUserId === ownerId && (
-            <div className="owner-actions">
-              <EditUserModal
-                userId={ownerId}
-                userData={owner}
-                getData={getProfile}
-              />
-            </div>
-          )}
+          <div className="owner-actions">
+            <EditUserModal
+              userId={ownerId}
+              userData={owner}
+              getData={getProfile}
+            />
+          </div>
+        )}
       </div>
 
       <div className="owner-jetskis">
@@ -151,6 +152,14 @@ function OwnerProfile() {
                         <i className="fas fa-phone"></i>{" "}
                         {eachReservation.user.phoneNumber || "No disponible"}
                       </p>
+                      <Link to={`/jet-ski/${eachReservation.jetSki._id}`}>
+                        <p>
+                          <i className="fas fa-anchor"></i>{" "}
+                          <span style={{ color: "#3A6D8C" }}>
+                            Ver moto
+                          </span>
+                        </p>
+                      </Link>
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>

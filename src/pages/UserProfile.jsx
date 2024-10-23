@@ -122,6 +122,14 @@ function UserProfile() {
                         <i className="fas fa-phone"></i>{" "}
                         {eachReservation.owner.phoneNumber || "No disponible"}
                       </p>
+                      <Link to={`/jet-ski/${eachReservation.jetSki._id}`}>
+                        <p>
+                          <i className="fas fa-ship"></i>{" "}
+                          <span style={{ color: "#3A6D8C" }}>
+                            Ver moto
+                          </span>
+                        </p>
+                      </Link>
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
