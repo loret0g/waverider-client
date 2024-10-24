@@ -6,9 +6,9 @@ import { PropagateLoader } from "react-spinners";
 import service from "../services/config";
 import { AuthContext } from "../context/auth.context";
 
-import EditUserModal from "../components/EditUserModal";
 import JetSkiCard from "../components/JetSkiCard";
-import AddJetSkiModal from "../components/AddJetSkiModal";
+import EditUserModal from "../components/modals/EditUserModal";
+import AddJetSkiModal from "../components/modals/AddJetSkiModal";
 
 function OwnerProfile() {
   const { loggedUserId } = useContext(AuthContext);

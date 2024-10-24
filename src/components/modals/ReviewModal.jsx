@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import StarRatings from "react-star-ratings";
-import service from "../services/config";
+import service from "../../services/config";
 
 function ReviewModal({ show, handleClose, jetSkiId, setCanLeaveReview, getReviews }) {
   const [rating, setRating] = useState(0);

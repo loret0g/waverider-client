@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import service from "../services/config";
-import { AuthContext } from "../context/auth.context";
+import service from "../../services/config";
+import { AuthContext } from "../../context/auth.context";
 import Button from "react-bootstrap/Button";
 import { PuffLoader } from "react-spinners";
 

@@ -4,7 +4,7 @@ import { AuthContext } from "../context/auth.context";
 import Accordion from "react-bootstrap/Accordion";
 import { PropagateLoader } from "react-spinners";
 
-import EditUserModal from "../components/EditUserModal";
+import EditUserModal from "../components/modals/EditUserModal";
 import { Link, useParams } from "react-router-dom";
 
 function UserProfile() {

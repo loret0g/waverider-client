@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import StarRatings from 'react-star-ratings';
-import EditJetSkiModal from "./EditJetSkiModal";
+import EditJetSkiModal from "./modals/EditJetSkiModal";
 
 
 function JetSkiCard({ jetSki, getData, isOwnerView }) {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import service from "../services/config";
+import service from "../../services/config";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";

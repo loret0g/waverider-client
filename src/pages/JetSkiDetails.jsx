@@ -9,9 +9,9 @@ import { Accordion } from "react-bootstrap";
 import { PropagateLoader } from "react-spinners";
 
 import StarRatings from "react-star-ratings";
-import LoginRequiredModal from "../components/LoginRequiredModal";
-import ReviewModal from "../components/ReviewModal";
-import ReservationSuccessModal from "../components/ReservationSuccessModal";
+import LoginRequiredModal from "../components/modals/LoginRequiredModal";
+import ReviewModal from "../components/modals/ReviewModal";
+import ReservationSuccessModal from "../components/modals/ReservationSuccessModal";
 
 function JetSkiDetails() {
   const { isLoggedIn, loggedUserRole, loggedUserId } = useContext(AuthContext);
@@ -246,7 +246,7 @@ function JetSkiDetails() {
       />
       <ReservationSuccessModal
         show={showSuccessModal}
-        handleClose={() => setShowSuccessModal(false)}
+        handleClose={() => {setShowSuccessModal(false); checkCanLeaveReview()}}
         loggedUserId={loggedUserId}
       />
     </div>
