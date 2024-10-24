@@ -9,8 +9,11 @@ function AddJetSkiModal({ getData }) {
   const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
+    year: "",
+    horsepower: "",
     description: "",
     price: "",
+    deposit: "",
     images: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
@@ -91,8 +94,25 @@ function AddJetSkiModal({ getData }) {
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                placeholder="Nombre de la moto"
                 autoFocus
+              />
+            </Form.Group>
+            <Form.Group controlId="formYear" className="mt-3">
+              <Form.Label>Año de fabricación</Form.Label>
+              <Form.Control
+                type="number"
+                name="year"
+                value={formData.year}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formHorsepower" className="mt-3">
+              <Form.Label>Potencia (Caballos de fuerza)</Form.Label>
+              <Form.Control
+                type="number"
+                name="horsepower"
+                value={formData.horsepower}
+                onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group controlId="formDescription" className="mt-3">
@@ -112,9 +132,17 @@ function AddJetSkiModal({ getData }) {
                 name="price"
                 value={formData.price}
                 onChange={handleInputChange}
-                placeholder="Precio por día"
               />
             </Form.Group>
+            <Form.Group controlId="formTopSpeed" className="mt-3">
+              <Form.Label>Depósito / Fianza</Form.Label>
+              <Form.Control
+                type="number"
+                name="deposit"
+                value={formData.deposit}
+                onChange={handleInputChange}
+              />
+              </Form.Group>            
             <Form.Group controlId="formImages" className="mt-3">
               <Form.Label>Selecciona una imagen</Form.Label>
               <Form.Control

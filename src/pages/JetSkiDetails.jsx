@@ -144,6 +144,13 @@ function JetSkiDetails() {
           </Link>
         </div>
       </div>
+
+      <div className="jetski-tags">
+        <span className="tag">{jetSki.year}</span>
+        <span className="tag">{jetSki.horsepower}CV</span>
+        <span className="tag">Depósito: {jetSki.deposit}€</span>
+      </div>
+
       <div className="jetski-info">
         <p>{jetSki.description}</p>
         {/* Contenedor según si está logueado */}

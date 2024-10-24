@@ -324,16 +324,33 @@ a.dropdown-item {
   display: flex;
   align-items: center;
   width: 100%;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   flex-direction: column;
 }
 
 .jetski-info p {
-  /* padding-right: 2rem; */
+  justify-content: flex-start;
   padding: 0.5rem;
   white-space: pre-line;
   color: var(--sand);
 }
+
+/* Etiquetas de información */
+.jetski-tags {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.jetski-tags .tag {
+  background-color: #cfcfcf;
+  /* color: #333; */
+  padding: 0.2rem 0.4rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
 
 /* Contenedor de la reserva a la derecha */
 .reservation-jetski-details {
@@ -355,8 +372,6 @@ a.dropdown-item {
 }
 
 .reservation-jetski-details h2 {    /* Precio */
-  /* width: 100%;
-  text-align: center; */
   font-size: 1rem;
   padding: 0.4rem 1rem;
   font-weight: bold;
@@ -378,7 +393,6 @@ a.dropdown-item {
   border-radius: 8px;
   border: 1px solid #ddd;
   text-align: center;
-  /* margin: 0.5rem; */
 }
 
 .btn-reserve {
@@ -491,7 +505,6 @@ a.dropdown-item {
 .add-review {
   padding: 1rem 0 0;
   text-align: center;
-  /* padding-bottom: 0; */
 }
 
 /* MEDIA QUERIES */
@@ -504,7 +517,7 @@ a.dropdown-item {
 
 @media (min-width: 900px) {
   .jetski-details {   /*Contenedor padre*/
-    margin: 3rem auto;
+    margin: 3rem;
   }
 
   .jetski-pic-owner {

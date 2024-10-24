@@ -9,8 +9,11 @@ function EditJetSkiModal({ jetSki, getData }) {
   const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({
     name: jetSki.name,
+    year: jetSki.year,
+    horsepower: jetSki.horsepower,
     description: jetSki.description,
     price: jetSki.price,
+    deposit: jetSki.deposit,
     images: jetSki.images || [],
   });
   const [errorMessage, setErrorMessage] = useState("");
@@ -63,15 +66,13 @@ function EditJetSkiModal({ jetSki, getData }) {
   const [imageUrl, setImageUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false); // for a loading animation effect
 
-  // below function should be the only function invoked when the file type input changes => onChange={handleFileUpload}
   const handleFileUpload = async (event) => {
     if (!event.target.files[0]) {
       return;
     }
+    setIsUploading(true);
 
-    setIsUploading(true); // to start the loading animation
-
-    const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
+    const uploadData = new FormData();
     uploadData.append("image", event.target.files[0]);
 
     try {
@@ -105,53 +106,82 @@ function EditJetSkiModal({ jetSki, getData }) {
           {!confirmDelete ? (
             <>
               <Form>
-                <Form.Group controlId="formName">
-                  <Form.Label>Nombre de la Moto</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    autoFocus
-                  />
-                </Form.Group>
-                <Form.Group controlId="formDescription" className="mt-3">
-                  <Form.Label>Descripción</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    name="description"
-                    value={formData.description}
-                    onChange={handleInputChange}
-                  />
-                </Form.Group>
-                <Form.Group controlId="formPrice" className="mt-3">
-                  <Form.Label>Precio (€)</Form.Label>
-                  <Form.Control
-                    type="number"
-                    name="price"
-                    value={formData.price}
-                    onChange={handleInputChange}
-                  />
-                </Form.Group>
-                <Form.Group controlId="formImages" className="mt-3">
-                  <Form.Label>Selecciona una imagen</Form.Label>
-                  <Form.Control
-                    type="file"
-                    name="images"
-                    onChange={handleFileUpload}
-                    disabled={isUploading}
-                  />
-                  <div className="modal-spinner">
-                    {isUploading ? <PuffLoader color="#689BB0" margin={5} size={20} /> : null}
-                    {imageUrl ? (
-                      <div>
-                        <img src={imageUrl} alt="img" width={200} />
-                      </div>
-                    ) : null}
+            <Form.Group controlId="formName">
+              <Form.Label>Modelo</Form.Label>
+              <Form.Control
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group controlId="formYear" className="mt-3">
+              <Form.Label>Año de fabricación</Form.Label>
+              <Form.Control
+                type="number"
+                name="year"
+                value={formData.year}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formHorsepower" className="mt-3">
+              <Form.Label>Potencia (Caballos de fuerza)</Form.Label>
+              <Form.Control
+                type="number"
+                name="horsepower"
+                value={formData.horsepower}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formDescription" className="mt-3">
+              <Form.Label>Descripción</Form.Label>
+              <Form.Control
+                as="textarea"
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+                rows={3}
+              />
+            </Form.Group>
+            <Form.Group controlId="formPrice" className="mt-3">
+              <Form.Label>Precio</Form.Label>
+              <Form.Control
+                type="number"
+                name="price"
+                value={formData.price}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formTopSpeed" className="mt-3">
+              <Form.Label>Depósito / Fianza</Form.Label>
+              <Form.Control
+                type="number"
+                name="deposit"
+                value={formData.deposit}
+                onChange={handleInputChange}
+              />
+              </Form.Group>            
+            <Form.Group controlId="formImages" className="mt-3">
+              <Form.Label>Selecciona una imagen</Form.Label>
+              <Form.Control
+                type="file"
+                name="images"
+                onChange={handleFileUpload}
+                disabled={isUploading}
+              />
+              <div className="modal-spinner">
+                {isUploading ? (
+                  <PuffLoader color="#689BB0" margin={5} size={20} />
+                ) : null}
+                {imageUrl ? (
+                  <div>
+                    <img src={imageUrl} alt="img" width={200} />
                   </div>
-                </Form.Group>
-              </Form>
+                ) : null}
+              </div>
+            </Form.Group>
+          </Form>
               {errorMessage && (
                 <p className="error-message">
                   {errorMessage}
