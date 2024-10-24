@@ -169,38 +169,52 @@ a.dropdown-item {
 /*********************************************/
 /** HOMEPAGE */
 .homepage-container {
-  margin-top: 6rem;
+  /* margin-top: 6rem; */
 }
 
 @media (min-width: 400px) {
   .homepage-container {
-    margin: 8.6rem 2rem 0;
+    /* margin: 8.6rem 2rem 0; */
   }
 }
 
-.homepage-container  p {
+.homepage-container  p {  /* Texto por si no hay motos en la web */
   color: var(--sand);
 }
 
-.sort-container {
+ .sort-container {
   display: flex;
-  justify-content: right;
+  justify-content: center;
+  gap: 2rem;
   margin: 1.5rem;
 }
 
-.sort-button {
-  background-color: var(--background-color);
-  color: white;
-  /* font-size: 1rem; */
-  border: none;
-  border-radius: 8px;
-  padding: 0.4rem 0.8rem;
-  transition: background-color 0.3s ease;
+@media (min-width: 600px) {
+  .sort-container {
+    justify-content: left;
+  }
 }
 
-.sort-button:hover {
-  background-color: var(--primary);
-  color: var(--background-color);
+.homepage-dropdown .dropdown-toggle {
+  width: 10rem !important;
+}
+
+.homepage-dropdown .dropdown-item {
+  font-size: 0.9rem;
+  padding: 0 0.2rem;
+}
+.homepage-dropdown .dropdown-menu{
+  width: max-content !important;
+}
+
+.homepage-dropdown .dropdown-header {
+  text-align: left;
+  padding: 0;
+  padding-left: 0.5rem;
+}
+
+#jetski-section {
+  margin: 4rem;
 }
 
 .container-jetski {
