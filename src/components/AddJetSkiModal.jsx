@@ -42,15 +42,14 @@ function AddJetSkiModal({ getData }) {
 
   /* CLOUDINARY */
   const [imageUrl, setImageUrl] = useState(null);
-  const [isUploading, setIsUploading] = useState(false); // for a loading animation effect
+  const [isUploading, setIsUploading] = useState(false);
 
-  // below function should be the only function invoked when the file type input changes => onChange={handleFileUpload}
   const handleFileUpload = async (event) => {
     if (!event.target.files[0]) {
       return;
     }
 
-    setIsUploading(true); // to start the loading animation
+    setIsUploading(true);
 
     const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
     uploadData.append("image", event.target.files[0]);
