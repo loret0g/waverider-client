@@ -37,13 +37,11 @@ function Signup() {
 
       navigate("/login");
     } catch (error) {
-      console.log(error); // Muestra el error que nos manda el back
-
       if (error.response.status === 400) {
         setErrorMessage(error.response.data.message);
       } else {
-        // Aquí debe redireccionar a una pag de error
-        //! redirección a /error
+        console.log(error);
+        navigate("/error");
       }
     }
   };

@@ -40,7 +40,8 @@ function JetSkiDetails() {
       );
       setJetSki(response.data);
     } catch (error) {
-      console.log(error);
+      console.log(error);console.log(error);
+      navigate("/error");
     }
   };
 
@@ -52,6 +53,7 @@ function JetSkiDetails() {
       setReview(response.data);
     } catch (error) {
       console.log(error);
+      navigate("/error");
     }
   };
 
@@ -59,7 +61,6 @@ function JetSkiDetails() {
     try {
       const response = await service.get(`/review/${jetSkiId}/${loggedUserId}`);
       setCanLeaveReview(response.data.canLeaveReview);
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -79,7 +80,6 @@ function JetSkiDetails() {
         navigate(`/profile/${loggedUserId}`);
       }
     } catch (error) {
-      console.log(error);
       if (error.response && error.response.data) {
         setErrorMessage(error.response.data.message);
       } else {

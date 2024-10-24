@@ -37,7 +37,6 @@ function EditUserModal({ userId, userData, getData }) {
       getData(); // Actualizar los datos
       handleClose();
     } catch (error) {
-      console.log(error);
       if (error.response && error.response.data) {
         setErrorMessage(error.response.data.message);
       } else {

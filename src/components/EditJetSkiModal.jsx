@@ -34,11 +34,9 @@ function EditJetSkiModal({ jetSki, getData }) {
         `/owner/jet-ski/${jetSki._id}`,
         formData
       );
-      console.log(response);
       getData();
       handleClose();
     } catch (error) {
-      console.log(error);
       if (error.response && error.response.data) {
         setErrorMessage(error.response.data.message);
       } else {
@@ -57,7 +55,6 @@ function EditJetSkiModal({ jetSki, getData }) {
       getData();
       handleClose();
     } catch (error) {
-      console.log(error);
       setErrorMessage("Error al eliminar la moto, inténtalo de nuevo.");
     }
   };

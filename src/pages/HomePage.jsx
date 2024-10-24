@@ -19,6 +19,7 @@ function HomePage() {
       setJetSki(response.data);
     } catch (error) {
       console.log(error);
+      navigate("/error");
     }
   };
 

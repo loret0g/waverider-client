@@ -39,11 +39,11 @@ function Login() {
       navigate("/");
     } catch (error) {
       console.log(error);
-      //! redirección a /error
       if (error.response.status === 400) {
         setErrorMessage(error.response.data.message);
       } else {
-        // Aquí debe redireccionar a una pag de error
+        console.log(error);
+        navigate("/error");
       }
     }
   };

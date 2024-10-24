@@ -26,6 +26,7 @@ function UserProfile() {
       setUser(response.data);
     } catch (error) {
       console.log(error);
+      navigate("/error");
     }
   };
 
@@ -35,6 +36,7 @@ function UserProfile() {
       setReservations(response.data);
     } catch (error) {
       console.log(error);
+      navigate("/error");
     }
   };
 

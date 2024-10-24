@@ -19,7 +19,6 @@ function ReviewModal({ show, handleClose, jetSkiId, setCanLeaveReview, getReview
       setCanLeaveReview(false)  // Que desaparezca el botón de 'añadir reseña'
       getReviews(); // Actualizo la lista de reseñas
     } catch (error) {
-      console.log(error);
       setErrorMessage("Error al enviar la reseña.");
     }
   };

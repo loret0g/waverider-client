@@ -16,6 +16,7 @@ import OwnerProfile from './pages/OwnerProfile'
 import ProtectedRoute from './components/ProtectedRoute'
 import Footer from './components/Footer'
 import JetSkiDetails from './pages/JetSkiDetails'
+import ErrorPage from './pages/ErrorPage'
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
 
 
         <Route path='*' element={<NotFound/>} />
+        <Route path="/error" element={<ErrorPage/>} />
 
       </Routes>
 

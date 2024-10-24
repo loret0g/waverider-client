@@ -35,7 +35,6 @@ function AuthWrapper(props) {
       // Llamada para almacenar datos del usuario y que no vayan en el token (payload):
       if (response.data.role === "owner") {
         const ownerDetails = await service.get(`/owner/${response.data._id}`);
-        // console.log("Owner details: ", ownerDetails.data.owner.username)
         setLoggedUserName(ownerDetails.data.owner.username);
         setLoggedUserPhoto(ownerDetails.data.owner.photo);
       } else if (response.data.role === "user") {
@@ -47,7 +46,6 @@ function AuthWrapper(props) {
       setIsValidatingToken(false);
     } catch (error) {
       // el token no es válido
-      console.log(error);
       setIsLoggedIn(false);
       setLoggedUserId(null);
       setLoggedUserRole(null);

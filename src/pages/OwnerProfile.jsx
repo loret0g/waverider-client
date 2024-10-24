@@ -28,7 +28,6 @@ function OwnerProfile() {
       const response = await service.get(`/owner/${ownerId}`);
       setOwner(response.data.owner);
       setJetSki(response.data.jetSkis);
-      console.log(response.data.owner)
     } catch (error) {
       console.log(error);
     }
@@ -40,6 +39,7 @@ function OwnerProfile() {
       setReservations(response.data);
     } catch (error) {
       console.log(error);
+      navigate("/error");
     }
   };
 
