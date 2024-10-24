@@ -242,6 +242,23 @@ a.dropdown-item {
   color: var(--primary);
 }
 
+/** REVIEWS */
+.jetski-image-container {
+  position: relative;
+  width: 100%;
+}
+
+.star-rating {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(77, 77, 77, 0.7);
+  padding: 5px;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  border-radius: 5px;
+}
+
 /**************************************************/
 /** Página JetSki DETAILS */
 .jetski-details {
@@ -415,6 +432,67 @@ a.dropdown-item {
   color: var(--sand) !important;
 }
 
+/* Contenedor reseñas */
+.reviews-container {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+#review-body {
+  padding: 0 !important;
+}
+
+#review-body h4 {
+  margin: 0;
+}
+
+.review-item {
+  margin: 0 !important;
+  padding: 1rem !important;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.review-item:nth-child(even) {    /* pares */
+  background-color: #f1f1f1;
+}
+
+.review-item:last-child {
+  border-bottom: none;
+}
+
+.user-review {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;    /* Dioooos mio! para poner el nombre del usuario a la altura de las estrellas :( */
+}
+
+.user-review h4 {
+  font-size: 1.1rem;
+}
+
+.star-ratings .star-container {
+  padding: 0 0.1rem !important;
+}
+
+.review-item p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+#review-date {
+  text-align: right;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+/* Añadir reseña */
+.add-review {
+  padding: 1rem 0 0;
+  text-align: center;
+  /* padding-bottom: 0; */
+}
 
 /* MEDIA QUERIES */
 @media (min-width: 370px) {
@@ -426,8 +504,7 @@ a.dropdown-item {
 
 @media (min-width: 900px) {
   .jetski-details {   /*Contenedor padre*/
-    /* margin: 5.5rem auto; */
-    margin: 3rem 10rem;
+    margin: 3rem auto;
   }
 
   .jetski-pic-owner {
@@ -473,6 +550,7 @@ a.dropdown-item {
     margin: 0;
   }
 }
+
 
 /**************************************************/
 /** Perfiles */
@@ -578,7 +656,7 @@ a.dropdown-item {
   margin-bottom: 1rem;
   width: 100%;
 }
-.reservation-container h2 p {
+.reservation-container > p {
   color: #fff;
 }
 
@@ -860,4 +938,16 @@ a.dropdown-item {
 
 .modal-spinner img{
   border-radius: 12px;
+}
+
+/***************************************/
+/* review */
+#review {
+  background-color: #000;
+}
+
+.rating-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

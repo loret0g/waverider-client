@@ -32,7 +32,6 @@ function AddJetSkiModal({ getData }) {
       getData();
       handleClose();
     } catch (error) {
-      console.log(error);
       if (error.response && error.response.data) {
         setErrorMessage(error.response.data.message);
       } else {

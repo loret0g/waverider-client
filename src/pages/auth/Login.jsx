@@ -71,11 +71,11 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        
         <button type="submit" className="submit-button">
           Acceder
         </button>
-
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </form>
     </div>
   );

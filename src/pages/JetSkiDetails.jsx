@@ -4,8 +4,13 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { AuthContext } from "../context/auth.context";
 import service from "../services/config";
-import { Modal, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import { Accordion } from "react-bootstrap";
 import { PropagateLoader } from "react-spinners";
+
+import StarRatings from "react-star-ratings";
+import LoginRequiredModal from "../components/LoginRequiredModal";
+import ReviewModal from "../components/ReviewModal";
 
 function JetSkiDetails() {
   const { isLoggedIn, loggedUserRole, loggedUserId } = useContext(AuthContext);
@@ -16,10 +21,16 @@ function JetSkiDetails() {
   const [selectedDate, setSelectedDate] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const [review, setReview] = useState([]);
+  const [canLeaveReview, setCanLeaveReview] = useState(false);
+
   const [showWarning, setShowWarning] = useState(false); // Modal cuando no está autenticado y quiere ver el perfil del propietario
+  const [showReviewModal, setShowReviewModal] = useState(false);
 
   useEffect(() => {
     getJetSkis();
+    getReviews();
+    checkCanLeaveReview();
   }, []);
 
   const getJetSkis = async () => {
@@ -33,6 +44,27 @@ function JetSkiDetails() {
     }
   };
 
+  const getReviews = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_SERVER_URL}/api/review/${jetSkiId}`
+      );
+      setReview(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const checkCanLeaveReview = async () => {
+    try {
+      const response = await service.get(`/review/${jetSkiId}/${loggedUserId}`);
+      setCanLeaveReview(response.data.canLeaveReview);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
   const handleReservation = async () => {
     try {
       const response = await service.post(`/reservation/${jetSkiId}`, {
@@ -82,7 +114,24 @@ function JetSkiDetails() {
         )}
 
         <div className="jetski-header">
-          <h1>{jetSki.name}</h1>
+          <div className="rating-details">
+            <h1>{jetSki.name}</h1>
+            {review.length > 0 && (
+              <StarRatings
+                rating={
+                  review.reduce(
+                    (acc, eachReview) => acc + eachReview.rating,
+                    0
+                  ) / review.length
+                }
+                starRatedColor="gold"
+                numberOfStars={5}
+                name="rating"
+                starDimension="1rem"
+              />
+            )}
+          </div>
+
           <Link to={`/owner/${jetSki.owner._id}`} onClick={handleOwnerClick}>
             <div className="owner-container">
               <h2>{jetSki.owner.username}</h2>
@@ -95,14 +144,11 @@ function JetSkiDetails() {
           </Link>
         </div>
       </div>
-
       <div className="jetski-info">
         <p>{jetSki.description}</p>
-
-        {/* Condición según autenticación */}
+        {/* Contenedor según si está logueado */}
         <div className="reservation-jetski-details">
           <h2> {jetSki.price}€</h2>
-
           {isLoggedIn ? (
             <div className="date-reservation">
               <input
@@ -133,39 +179,69 @@ function JetSkiDetails() {
                 <Button id="btn-1" as={Link} to="/login">
                   Inicia sesión
                 </Button>
-                <Button
-                  id="btn-2"
-                  as={Link}
-                  to="/signup"
-                  className="ms-2"
-                >
+                <Button id="btn-2" as={Link} to="/signup" className="ms-2">
                   Regístrate
                 </Button>
               </div>
             </>
           )}
+        </div>{" "}
+        {/* cierre reservation-jetski-details */}
+      </div>{" "}
+      {/* cierre jetski-info */}
+      <div className="reviews-container">
+        <Accordion>
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>Valoraciones verificadas</Accordion.Header>
+            <Accordion.Body id="review-body">
+              {review.length > 0 ? (
+                review.map((eachReview) => (
+                  <div key={eachReview._id} className="review-item">
+                    <div className="user-review">
+                      <h4>{eachReview.user.username}</h4>
+                      <StarRatings
+                        rating={eachReview.rating}
+                        starRatedColor="gold"
+                        numberOfStars={5}
+                        name="rating"
+                        starDimension="1rem"
+                      />
+                    </div>
+
+                    <p>{eachReview.comment}</p>
+                    <p id="review-date">
+                      {new Date(eachReview.reviewDate).toLocaleDateString()}
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <p style={{ textAlign: "center", margin: "1rem" }}>
+                  Aún no hay reseñas.
+                </p>
+              )}
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+
+        <div className="add-review">
+          {isLoggedIn && canLeaveReview && (
+            <Button id="btn-2" onClick={() => setShowReviewModal(true)}>
+              Añadir reseña
+            </Button>
+          )}
+          <ReviewModal
+            show={showReviewModal}
+            handleClose={() => setShowReviewModal(false)}
+            jetSkiId={jetSkiId}
+            setCanLeaveReview={setCanLeaveReview} // Para actualizar el estado y que desaparezca el botón
+            getReviews={getReviews} // Para actualizar la lista de reseñas al agregar la nueva
+          />
         </div>
       </div>
-
-      <Modal show={showWarning} onHide={handleCloseWarning}>
-        <Modal.Header closeButton>
-          <Modal.Title>Inicia sesión</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Debes iniciar sesión para poder acceder al perfil del propietario
-        </Modal.Body>
-        <Modal.Footer>
-          <Button id="btn-1" as={Link} to="/login">
-            Inicia sesión
-          </Button>
-          <Button id="btn-2" as={Link} to="/signup">
-            Regístrate
-          </Button>
-          <Button variant="secondary" onClick={handleCloseWarning}>
-            Cerrar
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <LoginRequiredModal
+        showWarning={showWarning}
+        handleCloseWarning={handleCloseWarning}
+      />
     </div>
   );
 }

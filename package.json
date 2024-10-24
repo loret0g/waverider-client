@@ -17,7 +17,8 @@
     "react-bootstrap": "^2.10.5",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.0",
-    "react-spinners": "^0.14.1"
+    "react-spinners": "^0.14.1",
+    "react-star-ratings": "^2.3.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
