@@ -11,6 +11,7 @@ import { PropagateLoader } from "react-spinners";
 import StarRatings from "react-star-ratings";
 import LoginRequiredModal from "../components/LoginRequiredModal";
 import ReviewModal from "../components/ReviewModal";
+import ReservationSuccessModal from "../components/ReservationSuccessModal";
 
 function JetSkiDetails() {
   const { isLoggedIn, loggedUserRole, loggedUserId } = useContext(AuthContext);
@@ -26,6 +27,7 @@ function JetSkiDetails() {
 
   const [showWarning, setShowWarning] = useState(false); // Modal cuando no está autenticado y quiere ver el perfil del propietario
   const [showReviewModal, setShowReviewModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   useEffect(() => {
     getJetSkis();
@@ -40,7 +42,8 @@ function JetSkiDetails() {
       );
       setJetSki(response.data);
     } catch (error) {
-      console.log(error);console.log(error);
+      console.log(error);
+      console.log(error);
       navigate("/error");
     }
   };
@@ -65,20 +68,14 @@ function JetSkiDetails() {
       console.log(error);
     }
   };
-  
+
   const handleReservation = async () => {
     try {
       const response = await service.post(`/reservation/${jetSkiId}`, {
         reservationDate: selectedDate,
       });
-
       setErrorMessage("");
-
-      if (loggedUserRole === "owner") {
-        navigate(`/owner/${loggedUserId}`);
-      } else {
-        navigate(`/profile/${loggedUserId}`);
-      }
+      setShowSuccessModal(true); // Modal de éxito
     } catch (error) {
       if (error.response && error.response.data) {
         setErrorMessage(error.response.data.message);
@@ -144,13 +141,11 @@ function JetSkiDetails() {
           </Link>
         </div>
       </div>
-
       <div className="jetski-tags">
         <span className="tag">{jetSki.year}</span>
         <span className="tag">{jetSki.horsepower}CV</span>
         <span className="tag">Depósito: {jetSki.deposit}€</span>
       </div>
-
       <div className="jetski-info">
         <p>{jetSki.description}</p>
         {/* Contenedor según si está logueado */}
@@ -248,6 +243,11 @@ function JetSkiDetails() {
       <LoginRequiredModal
         showWarning={showWarning}
         handleCloseWarning={handleCloseWarning}
+      />
+      <ReservationSuccessModal
+        show={showSuccessModal}
+        handleClose={() => setShowSuccessModal(false)}
+        loggedUserId={loggedUserId}
       />
     </div>
   );
